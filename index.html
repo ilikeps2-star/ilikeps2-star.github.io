@@ -1,10 +1,12 @@
-<html lang="zh-TW"><head>
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="造肉試算">
-<title data-id="th-modified">肉豬造肉成本試算</title>
+<title>肉豬造肉成本試算</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-size:13px;background:#F5F5F0;color:#1a1a1a;padding:20px}
@@ -86,23 +88,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
 .bep-gap.neg{color:#A32D2D}
 @media(max-width:600px){.feeds{grid-template-columns:1fr}.results{grid-template-columns:1fr!important}}
 </style>
-<meta property="og:title" content="肉豬造肉成本試算" data-id="th-modified"><meta name="description" content="index" data-id="th-modified"><meta property="og:description" content="index" data-id="th-modified"><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified"><meta property="og:image:width" content="1501" data-id="th-modified"><meta property="og:image:height" content="1501" data-id="th-modified"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://pig-feed-calculator.tiiny.site/" data-id="th-modified"><meta property="og:type" content="website" data-id="th-modified"><script defer="" data-domain="pig-feed-calculator.tiiny.site" src="https://analytics.tiiny.site/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script></head>
-<body><div style="position: fixed !important; bottom: 0% !important; left: 0% !important; right: 0% !important; width: 100% !important; height: 55px !important; z-index: 9999 !important;"><a href="https://tiiny.host?ref=free-site">
-    <div style="padding: 10px !important; height: 55px; text-align: center; background: rgb(220,137,232) !important; background: linear-gradient(141deg, rgba(220,137,232,1) 0%, rgba(144,64,204,1) 100%) !important;">
-      <img style="height: 35px !important; width: auto !important;" src="https://tiiny.host/assets/img/ad.png" alt="tiiny.host">
-    </div>
-  </a></div>
+</head>
+<body>
 <div class="pg">
   <div class="mode-toggle">
     <button class="mode-btn active" id="btn-wout" onclick="setMode('wout')">固定出重</button>
     <button class="mode-btn" id="btn-days" onclick="setMode('days')">固定天數</button>
   </div>
   <p class="sec">基本參數</p>
-  <div id="global-params"><div class="params-row"><div class="pfield"><label>入重 (kg)</label><input type="number" id="win" value="25" step="1" min="0" onchange="onGlobal()"></div><div class="pfield"><label>出重 (kg)</label><input type="number" id="gw" value="125" step="1" min="0" onchange="onGlobal()"></div><div class="gain-pill"><span class="gv" id="gpill">100 kg</span><span class="gl">增重</span></div><div class="pfield"><label>小豬成本 (元/頭)</label><input type="number" id="piglet" value="5000" step="50" min="0" onchange="onPiglet()"></div></div></div>
+  <div id="global-params"></div>
   <p class="sec">飼料設定</p>
-  <div class="feeds" id="feeds"><div class="fcard" id="fc-0" style="border-top:3px solid #378ADD"><div class="fhdr"><input type="checkbox" checked="" onchange="tgFeed(0,this)"><input class="fname" type="text" value="飼料 A" oninput="onName(0,this)"></div><div class="fbody"><div class="fl">飼料價格 (元/kg)</div><input class="fi" type="number" id="price-0" value="12.5" step="0.1" min="0" onchange="onPrice(0)"><div class="trio-box"><div class="trio-row"><div class="trio-item"><label>採食量 (kg/天)</label><input type="number" id="adfi-0" class="locked-inp" value="2.2" step="0.1" min="0" onchange="onAdfi(0)"><span class="state-badge locked" id="bg-adfi-0">✏️ 輸入</span></div><div class="trio-item"><label>FCR</label><input type="number" id="fcr-0" class="auto-inp" value="2.7" step="0.1" min="0" disabled="" onchange="onFcr(0)"><span class="state-badge auto" id="bg-fcr-0">↻ 連動</span></div><div class="trio-item"><label>飼養天數 (天)</label><input type="number" id="days-0" class="locked-inp" value="110" step="1" min="1" onchange="onDays(0)"><span class="state-badge locked" id="bg-days-0">✏️ 輸入</span></div></div><div class="link-row"><span class="link-lbl">更改數值 連動</span><div class="link-btns"><button class="link-btn" id="lnk-adfi-0" onclick="setAuto(0,2)">採食量</button><button class="link-btn active" id="lnk-fcr-0" onclick="setAuto(0,1)">FCR</button><button class="link-btn" id="lnk-days-0" onclick="setAuto(0,0)">飼養天數</button></div></div></div><div class="mort-row"><label>死亡率 (%)</label><input type="number" id="mort-0" value="0" step="0.5" min="0" max="100" onchange="onMort(0)"></div><div class="price-box"><div class="fl">出豬牌價 (元/kg)</div><input type="number" id="mkt-0" value="85" step="1" min="0" onchange="onMkt(0)"></div></div></div><div class="fcard" id="fc-1" style="border-top:3px solid #1D9E75"><div class="fhdr"><input type="checkbox" checked="" onchange="tgFeed(1,this)"><input class="fname" type="text" value="飼料 B" oninput="onName(1,this)"></div><div class="fbody"><div class="fl">飼料價格 (元/kg)</div><input class="fi" type="number" id="price-1" value="14" step="0.1" min="0" onchange="onPrice(1)"><div class="trio-box"><div class="trio-row"><div class="trio-item"><label>採食量 (kg/天)</label><input type="number" id="adfi-1" class="locked-inp" value="2.3" step="0.1" min="0" onchange="onAdfi(1)"><span class="state-badge locked" id="bg-adfi-1">✏️ 輸入</span></div><div class="trio-item"><label>FCR</label><input type="number" id="fcr-1" class="auto-inp" value="2.6" step="0.1" min="0" disabled="" onchange="onFcr(1)"><span class="state-badge auto" id="bg-fcr-1">↻ 連動</span></div><div class="trio-item"><label>飼養天數 (天)</label><input type="number" id="days-1" class="locked-inp" value="100" step="1" min="1" onchange="onDays(1)"><span class="state-badge locked" id="bg-days-1">✏️ 輸入</span></div></div><div class="link-row"><span class="link-lbl">更改數值 連動</span><div class="link-btns"><button class="link-btn" id="lnk-adfi-1" onclick="setAuto(1,2)">採食量</button><button class="link-btn active" id="lnk-fcr-1" onclick="setAuto(1,1)">FCR</button><button class="link-btn" id="lnk-days-1" onclick="setAuto(1,0)">飼養天數</button></div></div></div><div class="mort-row"><label>死亡率 (%)</label><input type="number" id="mort-1" value="0" step="0.5" min="0" max="100" onchange="onMort(1)"></div><div class="price-box"><div class="fl">出豬牌價 (元/kg)</div><input type="number" id="mkt-1" value="85" step="1" min="0" onchange="onMkt(1)"></div></div></div><div class="fcard off" id="fc-2" style="border-top:3px solid #D85A30"><div class="fhdr"><input type="checkbox" onchange="tgFeed(2,this)"><input class="fname" type="text" value="飼料 C" oninput="onName(2,this)"></div><div class="fbody"><div class="fl">飼料價格 (元/kg)</div><input class="fi" type="number" id="price-2" value="16" step="0.1" min="0" onchange="onPrice(2)"><div class="trio-box"><div class="trio-row"><div class="trio-item"><label>採食量 (kg/天)</label><input type="number" id="adfi-2" class="locked-inp" value="2.4" step="0.1" min="0" onchange="onAdfi(2)"><span class="state-badge locked" id="bg-adfi-2">✏️ 輸入</span></div><div class="trio-item"><label>FCR</label><input type="number" id="fcr-2" class="auto-inp" value="2.5" step="0.1" min="0" disabled="" onchange="onFcr(2)"><span class="state-badge auto" id="bg-fcr-2">↻ 連動</span></div><div class="trio-item"><label>飼養天數 (天)</label><input type="number" id="days-2" class="locked-inp" value="95" step="1" min="1" onchange="onDays(2)"><span class="state-badge locked" id="bg-days-2">✏️ 輸入</span></div></div><div class="link-row"><span class="link-lbl">更改數值 連動</span><div class="link-btns"><button class="link-btn" id="lnk-adfi-2" onclick="setAuto(2,2)">採食量</button><button class="link-btn active" id="lnk-fcr-2" onclick="setAuto(2,1)">FCR</button><button class="link-btn" id="lnk-days-2" onclick="setAuto(2,0)">飼養天數</button></div></div></div><div class="mort-row"><label>死亡率 (%)</label><input type="number" id="mort-2" value="0" step="0.5" min="0" max="100" onchange="onMort(2)"></div><div class="price-box"><div class="fl">出豬牌價 (元/kg)</div><input type="number" id="mkt-2" value="85" step="1" min="0" onchange="onMkt(2)"></div></div></div></div>
+  <div class="feeds" id="feeds"></div>
   <p class="sec">損益分析</p>
-  <div class="results" id="results" style="grid-template-columns: repeat(2, 1fr);"><div class="rcard best"><div class="rcard-name">飼料 A<span class="badge">最高毛利</span></div><div><span class="comp-tag low">110天 (+10天)</span></div><div class="calc-box"><div class="cline"><span class="lbl">毛豬售價</span><span class="val">10625 元/頭</span></div><div class="cline"><span class="lbl">飼料費</span><span class="val neg">− 3375 元</span></div><div class="cline"><span class="lbl">小豬成本</span><span class="val neg">− 5000 元</span></div><hr class="divider"><div class="profit-row"><span class="profit-lbl">毛利/頭</span><span class="profit-val pos">+2250 元</span></div></div><div class="bep-box"><div><div class="bep-lbl">損益點牌價</div><span class="bep-val">67.0 元/kg</span><span class="bep-gap pos">▲18.0 元</span></div><div style="text-align:right"><div class="bep-lbl">造肉成本</div><span class="bep-val">33.75 元/kg</span></div></div></div><div class="rcard"><div class="rcard-name">飼料 B</div><div><span class="comp-tag best">100天 ✓最快</span></div><div class="calc-box"><div class="cline"><span class="lbl">毛豬售價</span><span class="val">10625 元/頭</span></div><div class="cline"><span class="lbl">飼料費</span><span class="val neg">− 3640 元</span></div><div class="cline"><span class="lbl">小豬成本</span><span class="val neg">− 5000 元</span></div><hr class="divider"><div class="profit-row"><span class="profit-lbl">毛利/頭</span><span class="profit-val pos">+1985 元</span></div></div><div class="bep-box"><div><div class="bep-lbl">損益點牌價</div><span class="bep-val">69.1 元/kg</span><span class="bep-gap pos">▲15.9 元</span></div><div style="text-align:right"><div class="bep-lbl">造肉成本</div><span class="bep-val">36.40 元/kg</span></div></div></div></div>
+  <div class="results" id="results"></div>
 </div>
 <script>
 const ACC=['#378ADD','#1D9E75','#D85A30'];
@@ -327,6 +325,5 @@ buildGlobalParams();
 buildFeeds();
 calc();
 </script>
-
-
-<div style="height: 55px !important;"></div></body></html>
+</body>
+</html>
