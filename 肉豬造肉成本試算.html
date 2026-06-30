@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="造肉試算">
+<title>肉豬造肉成本試算</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-size:13px;background:#F5F5F0;color:#1a1a1a;padding:20px}
+.pg{max-width:960px;margin:0 auto}
+.sec{font-size:14px;font-weight:500;margin-bottom:10px;margin-top:18px}
+.sec-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;margin-top:18px}
+.sec-row .sec{margin:0}
+.mode-toggle{display:flex;background:#E0E0DC;border-radius:10px;padding:3px;gap:3px;width:fit-content;margin-bottom:10px}
+.mode-btn{padding:7px 24px;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-weight:500;background:transparent;color:#888;transition:all .15s}
+.mode-btn.active{background:#fff;color:#1a1a1a;box-shadow:0 1px 4px rgba(0,0,0,0.12)}
+.adv-hint{font-size:11px;color:#888;background:#F0F0EC;border-radius:8px;padding:7px 12px;margin-bottom:16px;line-height:1.6}
+.adv-hint strong{color:#555}
+.feeds{display:grid;gap:12px}
+.fcard{background:#fff;border:0.5px solid rgba(0,0,0,0.12);border-radius:12px;padding:14px}
+.fcard.off .fbody{display:none}
+.fcard.off .fhdr{margin-bottom:0}
+.fhdr{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.fhdr input[type=checkbox]{accent-color:#378ADD;width:16px;height:16px;cursor:pointer;flex-shrink:0}
+.fname-wrap{display:flex;align-items:center;gap:3px;flex:1;min-width:0;border-bottom:1px dashed rgba(0,0,0,0.2)}
+.fname-wrap:focus-within{border-bottom-color:#378ADD}
+.fname-icon{font-size:11px;color:#bbb;flex-shrink:0}
+.fname{font-size:14px;font-weight:500;border:none;background:transparent;color:#1a1a1a;outline:none;flex:1;min-width:0;padding:1px 2px}
+.rm-btn{background:#F0F0EC;border:0.5px solid rgba(0,0,0,0.15);cursor:pointer;font-size:13px;color:#999;padding:3px 7px;border-radius:5px;flex-shrink:0;line-height:1;transition:all .15s;font-weight:600}
+.rm-btn:hover{color:#A32D2D;background:#FCE8E8;border-color:#A32D2D}
+.add-btn{padding:5px 14px;border:none;border-radius:8px;background:#378ADD;color:#fff;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .15s}
+.add-btn:hover{background:#2772C3}
+.add-btn:disabled{background:#ccc;cursor:not-allowed}
+.field-row{display:flex;gap:8px;margin-bottom:10px;align-items:flex-end}
+.field-row-bot{display:flex;gap:8px;margin-top:10px}
+.cf-field{flex:1;display:flex;flex-direction:column;gap:3px}
+.cf-field label{font-size:11px;color:#777;white-space:nowrap}
+.cf-field input{width:100%;font-size:14px;padding:6px 8px;border-radius:8px;border:0.5px solid rgba(0,0,0,0.15);background:#fff;color:#1a1a1a;text-align:center}
+.cf-field input:focus{outline:none;border-color:#378ADD}
+.mkt-field input{border-color:rgba(29,158,117,0.4)!important;background:#F0F8F4}
+.mkt-field input:focus{border-color:#1D9E75!important;background:#fff}
+.mkt-field label{color:#0F6E56!important;font-weight:500}
+.trio-box{background:#F5F5F0;border-radius:8px;padding:10px;margin-bottom:10px}
+.trio-row{display:flex;gap:7px;margin-bottom:8px}
+.trio-item{flex:1;display:flex;flex-direction:column;border-radius:6px;padding:2px 3px;transition:background .2s}
+.trio-item label{font-size:10px;color:#777;margin-bottom:3px;display:flex;align-items:center;gap:3px;white-space:nowrap;transition:color .2s}
+.trio-item input{width:100%;font-size:14px;padding:6px 7px;border-radius:8px;border:0.5px solid rgba(0,0,0,0.15);background:#fff;color:#1a1a1a;text-align:center;transition:border-color .2s,background .2s,color .2s}
+.trio-item input.locked-inp{border-color:rgba(55,138,221,0.5);background:#FAFCFF}
+.trio-item input.auto-inp{background:#EFEFEC;color:#888;border-color:rgba(0,0,0,0.08)}
+.trio-item input:focus{outline:none;border-color:#378ADD;background:#fff;color:#1a1a1a}
+.trio-item.field-locked{background:#FEF9EE}
+.trio-item.field-locked label{color:#B45309!important}
+.trio-item.field-locked input{background:#FEF3C7!important;border-color:#F59E0B!important;color:#92400E!important}
+.lock-btn{background:none;border:none;cursor:pointer;font-size:12px;padding:0;line-height:1;flex-shrink:0;transition:all .15s;opacity:0.4}
+.lock-btn:hover{opacity:0.9}
+.lock-btn.locked{opacity:1;filter:sepia(1) saturate(4) hue-rotate(5deg)}
+.state-badge{font-size:9px;font-weight:500;padding:2px 6px;border-radius:5px;margin-top:4px;display:inline-block}
+.state-badge.locked{background:#E6F1FB;color:#0C447C}
+.state-badge.auto{background:#EBEBEB;color:#aaa}
+.fcr-auto-tag{font-size:8px;background:#EBEBEB;color:#aaa;padding:1px 5px;border-radius:4px;margin-left:2px}
+.link-row{display:flex;align-items:center;gap:6px;margin-top:4px}
+.link-lbl{font-size:9.5px;color:#999;white-space:nowrap}
+.link-btns{display:flex;gap:3px}
+.link-btn{font-size:9.5px;padding:2px 8px;border-radius:5px;border:0.5px solid rgba(0,0,0,0.15);background:#F0F0EC;color:#888;cursor:pointer;transition:all .15s;font-weight:500}
+.link-btn.active{background:#E6F1FB;color:#0C447C;border-color:rgba(55,138,221,0.4);font-weight:600}
+.results{display:grid;gap:12px}
+.rcard{background:#fff;border-radius:12px;border:0.5px solid rgba(0,0,0,0.12);padding:16px}
+.rcard.best{border-top:3px solid #1D9E75}
+.rcard-name{font-size:12px;color:#777;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.badge{font-size:10px;color:#0F6E56;background:#E1F5EE;padding:2px 7px;border-radius:10px;font-weight:500}
+.calc-box{background:#F8F8F6;border-radius:8px;padding:10px 12px;margin-bottom:8px}
+.cline{display:flex;justify-content:space-between;font-size:12px;padding:3px 0}
+.cline .lbl{color:#777}
+.cline .val{font-weight:500}
+.cline .neg{color:#A32D2D}
+.divider{border:none;border-top:0.5px solid rgba(0,0,0,0.1);margin:5px 0}
+.profit-row{display:flex;justify-content:space-between;align-items:baseline;padding-top:6px}
+.profit-lbl{font-size:12px;color:#777}
+.profit-val{font-size:22px;font-weight:500}
+.profit-val.pos{color:#0F6E56}
+.profit-val.neg{color:#A32D2D}
+.bep-box{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:8px;border:0.5px solid rgba(0,0,0,0.1);background:#F8F8F6}
+.bep-lbl{font-size:11px;color:#777;margin-bottom:2px}
+.bep-val{font-size:14px;font-weight:500}
+.bep-gap{font-size:11px;margin-left:5px}
+.bep-gap.pos{color:#0F6E56}
+.bep-gap.neg{color:#A32D2D}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.action-btn{padding:9px 16px;border:none;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
+.btn-save{background:#1D9E75;color:#fff}
+.btn-save:hover{background:#16896A}
+.btn-export-all{background:#378ADD;color:#fff}
+.btn-export-all:hover{background:#2772C3}
+.btn-export{background:#F0F0EC;color:#555;border:0.5px solid rgba(0,0,0,0.15)}
+.btn-export:hover{background:#E0E0DC}
+.btn-clear{background:none;color:#ccc;border:0.5px solid rgba(0,0,0,0.12);font-size:12px;padding:7px 12px}
+.btn-clear:hover{color:#A32D2D;border-color:#A32D2D}
+.rec-count{font-size:11px;color:#aaa;margin-left:4px}
+@media(max-width:600px){.feeds{grid-template-columns:1fr!important}.results{grid-template-columns:1fr!important}.field-row{flex-wrap:wrap}.btn-row{gap:6px}.action-btn{font-size:12px;padding:8px 12px}}
+</style>
+</head>
+<body>
+<div class="pg">
+  <div class="mode-toggle">
+    <button class="mode-btn active" id="btn-simple" onclick="setAppMode('simple')">一般模式</button>
+    <button class="mode-btn" id="btn-advanced" onclick="setAppMode('advanced')">進階模式</button>
+  </div>
+  <div class="adv-hint" id="adv-hint" style="display:none">
+    <strong>進階模式：</strong>可按 🔓 鎖定<strong>出重</strong>或<strong>飼養天數</strong>，所有卡同步為同一數值。鎖定後可設定連動方式，FCR 亦可手動輸入數值。
+  </div>
+  <div class="sec-row">
+    <p class="sec" style="margin:0">飼料設定</p>
+    <button class="add-btn" id="add-feed-btn" onclick="addFeed()">＋ 新增比較</button>
+  </div>
+  <div class="feeds" id="feeds"></div>
+  <p class="sec">損益分析</p>
+  <div class="results" id="results"></div>
+  <div class="btn-row">
+    <button class="action-btn btn-save" onclick="saveRecord()">💾 儲存此次記錄</button>
+    <button class="action-btn btn-export-all" onclick="exportAllRecords()">📊 匯出全部記錄</button>
+    <button class="action-btn btn-export" onclick="exportExcel()">⬇ 匯出本次</button>
+    <button class="action-btn btn-clear" onclick="clearRecords()">🗑 清除記錄</button>
+    <span class="rec-count" id="rec-count"></span>
+  </div>
+</div>
+<script>
+const ACC=['#378ADD','#1D9E75','#D85A30','#9B59B6','#E67E22','#E91E8C'];
+const FEED_LABELS=['A','B','C','D','E','F'];
+const MAX_FEEDS=6;
+const STORAGE_KEY='pigCalcRecords';
+
+let appMode='simple';
+let daysLocked=false, woutLocked=false;
+let lockedDaysVal=110, lockedWoutVal=125;
+
+let feedCount=1;
+let fnames=['飼料 A'];
+let fen=[true];
+let price=[12.5];
+let adfi=[2.2];
+let fcr=[2.7];
+let win_pf=[25];
+let piglet_pf=[5000];
+let days_pf=[110];
+let wout_pf=[125];
+let mktPrice=[85];
+let af=[1];
+let notes=[''];
+
+function getMode(){ return (appMode==='advanced'&&daysLocked)?'days':(appMode==='advanced'&&woutLocked)?'wout':'free'; }
+
+function setAppMode(m){
+  appMode=m;
+  document.getElementById('btn-simple').className='mode-btn'+(m==='simple'?' active':'');
+  document.getElementById('btn-advanced').className='mode-btn'+(m==='advanced'?' active':'');
+  document.getElementById('adv-hint').style.display=m==='advanced'?'':'none';
+  if(m==='simple'){ daysLocked=false; woutLocked=false; }
+  buildFeeds(); calc();
+}
+
+function addFeed(){
+  if(feedCount>=MAX_FEEDS) return;
+  const prev=feedCount-1;
+  fnames.push('飼料 '+FEED_LABELS[feedCount]);
+  fen.push(true);
+  price.push(price[prev]);
+  adfi.push(adfi[prev]);
+  fcr.push(fcr[prev]);
+  win_pf.push(win_pf[prev]);
+  piglet_pf.push(piglet_pf[prev]);
+  days_pf.push(days_pf[prev]);
+  wout_pf.push(wout_pf[prev]);
+  mktPrice.push(mktPrice[prev]);
+  af.push(1);
+  notes.push('');
+  feedCount++;
+  updateAddBtn();
+  buildFeeds(); calc();
+}
+
+function removeFeed(f){
+  if(!confirm('確定移除「'+fnames[f]+'」的比較？')) return;
+  fnames.splice(f,1);
+  fen.splice(f,1);
+  price.splice(f,1);
+  adfi.splice(f,1);
+  fcr.splice(f,1);
+  win_pf.splice(f,1);
+  piglet_pf.splice(f,1);
+  days_pf.splice(f,1);
+  wout_pf.splice(f,1);
+  mktPrice.splice(f,1);
+  af.splice(f,1);
+  notes.splice(f,1);
+  feedCount--;
+  if(daysLocked||woutLocked) af=Array(feedCount).fill(1);
+  updateAddBtn();
+  buildFeeds(); calc();
+}
+
+function updateAddBtn(){
+  const btn=document.getElementById('add-feed-btn');
+  if(btn) btn.disabled=(feedCount>=MAX_FEEDS);
+}
+
+function updateFreeFCR(f){
+  const g=wout_pf[f]-win_pf[f];
+  if(g>0&&days_pf[f]>0){
+    fcr[f]=+(adfi[f]*days_pf[f]/g).toFixed(2);
+    const el=document.getElementById('fcr-'+f);
+    if(el) el.value=fcr[f];
+  }
+}
+
+function syncAuto(f){
+  const mode=getMode();
+  if(mode==='free') return;
+  if(mode==='days'){
+    const d=lockedDaysVal, g=wout_pf[f]-win_pf[f];
+    if(af[f]===0){
+      if(fcr[f]>0){ wout_pf[f]=+(win_pf[f]+adfi[f]*d/fcr[f]).toFixed(1); }
+      const el=document.getElementById('wout-'+f); if(el) el.value=wout_pf[f];
+    } else if(af[f]===1){
+      if(g>0){ fcr[f]=+(adfi[f]*d/g).toFixed(2); }
+      const el=document.getElementById('fcr-'+f); if(el) el.value=fcr[f];
+    } else {
+      if(d>0&&g>0){ adfi[f]=+(fcr[f]*g/d).toFixed(2); }
+      const el=document.getElementById('adfi-'+f); if(el) el.value=adfi[f];
+    }
+  } else {
+    const g=lockedWoutVal-win_pf[f]; if(g<=0) return;
+    if(af[f]===0){
+      if(adfi[f]>0&&fcr[f]>0){ days_pf[f]=Math.round(fcr[f]*g/adfi[f]); }
+      const el=document.getElementById('days-'+f); if(el) el.value=days_pf[f];
+    } else if(af[f]===1){
+      if(days_pf[f]>0){ fcr[f]=+(adfi[f]*days_pf[f]/g).toFixed(2); }
+      const el=document.getElementById('fcr-'+f); if(el) el.value=fcr[f];
+    } else {
+      if(days_pf[f]>0){ adfi[f]=+(fcr[f]*g/days_pf[f]).toFixed(2); }
+      const el=document.getElementById('adfi-'+f); if(el) el.value=adfi[f];
+    }
+  }
+}
+
+function updateUI(f){
+  const mode=getMode();
+  if(mode==='days'){
+    ['wout','fcr','adfi'].forEach((id,i)=>{
+      const isAuto=(af[f]===i);
+      const inp=document.getElementById(id+'-'+f);
+      const bdg=document.getElementById('bg-'+id+'-'+f);
+      const btn=document.getElementById('lnk-'+id+'-'+f);
+      if(inp){ inp.className=isAuto?'auto-inp':'locked-inp'; inp.disabled=isAuto; }
+      if(bdg){ bdg.className='state-badge '+(isAuto?'auto':'locked'); bdg.textContent=isAuto?'↻ 連動':''; }
+      if(btn) btn.className='link-btn'+(isAuto?' active':'');
+    });
+  } else if(mode==='wout'){
+    ['days','fcr','adfi'].forEach((id,i)=>{
+      const isAuto=(af[f]===i);
+      const inp=document.getElementById(id+'-'+f);
+      const bdg=document.getElementById('bg-'+id+'-'+f);
+      const btn=document.getElementById('lnk-'+id+'-'+f);
+      if(inp){ inp.className=isAuto?'auto-inp':'locked-inp'; inp.disabled=isAuto; }
+      if(bdg){ bdg.className='state-badge '+(isAuto?'auto':'locked'); bdg.textContent=isAuto?'↻ 連動':''; }
+      if(btn) btn.className='link-btn'+(isAuto?' active':'');
+    });
+  }
+}
+
+function setAuto(f,v){ af[f]=v; syncAuto(f); updateUI(f); calc(); }
+
+function toggleDaysLock(f){
+  if(daysLocked){ daysLocked=false; }
+  else { lockedDaysVal=days_pf[f]; for(let i=0;i<feedCount;i++) days_pf[i]=lockedDaysVal; daysLocked=true; woutLocked=false; af=Array(feedCount).fill(1); }
+  buildFeeds(); for(let i=0;i<feedCount;i++) if(fen[i]) syncAuto(i); calc();
+}
+
+function toggleWoutLock(f){
+  if(woutLocked){ woutLocked=false; }
+  else { lockedWoutVal=wout_pf[f]; for(let i=0;i<feedCount;i++) wout_pf[i]=lockedWoutVal; woutLocked=true; daysLocked=false; af=Array(feedCount).fill(1); }
+  buildFeeds(); for(let i=0;i<feedCount;i++) if(fen[i]) syncAuto(i); calc();
+}
+
+function onWin(f){ win_pf[f]=+document.getElementById('win-'+f).value; if(getMode()==='free') updateFreeFCR(f); else { syncAuto(f); updateUI(f); } calc(); }
+function onAdfi(f){ adfi[f]=+document.getElementById('adfi-'+f).value; if(getMode()==='free') updateFreeFCR(f); else { syncAuto(f); updateUI(f); } calc(); }
+function onFcr(f){ fcr[f]=+document.getElementById('fcr-'+f).value; syncAuto(f); updateUI(f); calc(); }
+function onDays(f){ days_pf[f]=+document.getElementById('days-'+f).value; if(getMode()==='free') updateFreeFCR(f); else { syncAuto(f); updateUI(f); } calc(); }
+function onWoutPF(f){ wout_pf[f]=+document.getElementById('wout-'+f).value; if(getMode()==='free') updateFreeFCR(f); else { syncAuto(f); updateUI(f); } calc(); }
+function onPrice(f){ price[f]=+document.getElementById('price-'+f).value; calc(); }
+function onMkt(f){ mktPrice[f]=+document.getElementById('mkt-'+f).value; calc(); }
+function onPiglet(f){ piglet_pf[f]=+document.getElementById('piglet-'+f).value; calc(); }
+function tgFeed(f,cb){ fen[f]=cb.checked; document.getElementById('fc-'+f).classList.toggle('off',!cb.checked); calc(); }
+function onName(f,el){ fnames[f]=el.value; }
+function onNote(f,el){ notes[f]=el.value; }
+
+function buildFeeds(){
+  const mode=getMode();
+  const isAdv=(appMode==='advanced');
+  const cols=Math.min(feedCount,3);
+  const feedsEl=document.getElementById('feeds');
+  feedsEl.style.gridTemplateColumns='repeat('+cols+',1fr)';
+
+  feedsEl.innerHTML=Array.from({length:feedCount},(_,f)=>{
+    let body='';
+
+    body+='<div class="field-row">'
+      +'<div class="cf-field"><label>入重 kg</label><input type="number" id="win-'+f+'" value="'+win_pf[f]+'" step="0.5" min="0" onchange="onWin('+f+')"></div>'
+      +'<div class="cf-field"><label>小豬成本 元/頭</label><input type="number" id="piglet-'+f+'" value="'+piglet_pf[f]+'" step="50" min="0" onchange="onPiglet('+f+')"></div>'
+      +'<div class="cf-field"><label>飼料價格 元/kg</label><input type="number" id="price-'+f+'" value="'+price[f]+'" step="0.1" min="0" onchange="onPrice('+f+')"></div>'
+      +'</div>';
+
+    body+='<div class="trio-box">';
+
+    if(!isAdv||mode==='free'){
+      const g=wout_pf[f]-win_pf[f];
+      const fcrVal=(g>0&&days_pf[f]>0)?+(adfi[f]*days_pf[f]/g).toFixed(2):0;
+      const wBtn=isAdv?'<button class="lock-btn" onclick="toggleWoutLock('+f+')">🔓</button>':'';
+      const dBtn=isAdv?'<button class="lock-btn" onclick="toggleDaysLock('+f+')">🔓</button>':'';
+      body+='<div class="trio-row">'
+        +'<div class="trio-item"><label>出重 kg '+wBtn+'</label><input type="number" id="wout-'+f+'" class="locked-inp" value="'+wout_pf[f]+'" step="0.5" min="0" onchange="onWoutPF('+f+')"></div>'
+        +'<div class="trio-item"><label>採食量 kg/天</label><input type="number" id="adfi-'+f+'" class="locked-inp" value="'+adfi[f]+'" step="0.1" min="0" onchange="onAdfi('+f+')"></div>'
+        +'</div>'
+        +'<div class="trio-row">'
+        +'<div class="trio-item"><label>飼養天數 天 '+dBtn+'</label><input type="number" id="days-'+f+'" class="locked-inp" value="'+days_pf[f]+'" step="1" min="1" onchange="onDays('+f+')"></div>'
+        +'<div class="trio-item"><label>FCR <span class="fcr-auto-tag">↻ 連動</span></label><input type="number" id="fcr-'+f+'" class="auto-inp" value="'+fcrVal+'" disabled></div>'
+        +'</div>';
+    } else if(mode==='days'){
+      const iWA=(af[f]===0),iFA=(af[f]===1),iAA=(af[f]===2);
+      body+='<div class="trio-row">'
+        +'<div class="trio-item"><label>出重 kg <button class="lock-btn" onclick="toggleWoutLock('+f+')">🔓</button></label>'
+        +'<input type="number" id="wout-'+f+'" class="'+(iWA?'auto-inp':'locked-inp')+'" value="'+wout_pf[f]+'" step="0.5" min="0" '+(iWA?'disabled ':'')+' onchange="onWoutPF('+f+')">'
+        +'<span class="state-badge '+(iWA?'auto':'locked')+'" id="bg-wout-'+f+'">'+(iWA?'↻ 連動':'')+'</span></div>'
+        +'<div class="trio-item"><label>採食量 kg/天</label>'
+        +'<input type="number" id="adfi-'+f+'" class="'+(iAA?'auto-inp':'locked-inp')+'" value="'+adfi[f]+'" step="0.1" min="0" '+(iAA?'disabled ':'')+' onchange="onAdfi('+f+')">'
+        +'<span class="state-badge '+(iAA?'auto':'locked')+'" id="bg-adfi-'+f+'">'+(iAA?'↻ 連動':'')+'</span></div>'
+        +'</div>'
+        +'<div class="trio-row">'
+        +'<div class="trio-item field-locked"><label>飼養天數 天 <button class="lock-btn locked" onclick="toggleDaysLock('+f+')">🔒</button></label>'
+        +'<input type="number" id="days-'+f+'" class="auto-inp" value="'+lockedDaysVal+'" disabled></div>'
+        +'<div class="trio-item"><label>FCR</label>'
+        +'<input type="number" id="fcr-'+f+'" class="'+(iFA?'auto-inp':'locked-inp')+'" value="'+fcr[f]+'" step="0.1" min="0" '+(iFA?'disabled ':'')+' onchange="onFcr('+f+')">'
+        +'<span class="state-badge '+(iFA?'auto':'locked')+'" id="bg-fcr-'+f+'">'+(iFA?'↻ 連動':'')+'</span></div>'
+        +'</div>'
+        +'<div class="link-row"><span class="link-lbl">連動</span><div class="link-btns">'
+        +'<button class="link-btn'+(iWA?' active':'')+'" id="lnk-wout-'+f+'" onclick="setAuto('+f+',0)">出重</button>'
+        +'<button class="link-btn'+(iFA?' active':'')+'" id="lnk-fcr-'+f+'" onclick="setAuto('+f+',1)">FCR</button>'
+        +'<button class="link-btn'+(iAA?' active':'')+'" id="lnk-adfi-'+f+'" onclick="setAuto('+f+',2)">採食量</button>'
+        +'</div></div>';
+    } else {
+      const iDA=(af[f]===0),iFA=(af[f]===1),iAA=(af[f]===2);
+      body+='<div class="trio-row">'
+        +'<div class="trio-item field-locked"><label>出重 kg <button class="lock-btn locked" onclick="toggleWoutLock('+f+')">🔒</button></label>'
+        +'<input type="number" id="wout-'+f+'" class="auto-inp" value="'+lockedWoutVal+'" disabled></div>'
+        +'<div class="trio-item"><label>採食量 kg/天</label>'
+        +'<input type="number" id="adfi-'+f+'" class="'+(iAA?'auto-inp':'locked-inp')+'" value="'+adfi[f]+'" step="0.1" min="0" '+(iAA?'disabled ':'')+' onchange="onAdfi('+f+')">'
+        +'<span class="state-badge '+(iAA?'auto':'locked')+'" id="bg-adfi-'+f+'">'+(iAA?'↻ 連動':'')+'</span></div>'
+        +'</div>'
+        +'<div class="trio-row">'
+        +'<div class="trio-item"><label>飼養天數 天 <button class="lock-btn" onclick="toggleDaysLock('+f+')">🔓</button></label>'
+        +'<input type="number" id="days-'+f+'" class="'+(iDA?'auto-inp':'locked-inp')+'" value="'+days_pf[f]+'" step="1" min="1" '+(iDA?'disabled ':'')+' onchange="onDays('+f+')">'
+        +'<span class="state-badge '+(iDA?'auto':'locked')+'" id="bg-days-'+f+'">'+(iDA?'↻ 連動':'')+'</span></div>'
+        +'<div class="trio-item"><label>FCR</label>'
+        +'<input type="number" id="fcr-'+f+'" class="'+(iFA?'auto-inp':'locked-inp')+'" value="'+fcr[f]+'" step="0.1" min="0" '+(iFA?'disabled ':'')+' onchange="onFcr('+f+')">'
+        +'<span class="state-badge '+(iFA?'auto':'locked')+'" id="bg-fcr-'+f+'">'+(iFA?'↻ 連動':'')+'</span></div>'
+        +'</div>'
+        +'<div class="link-row"><span class="link-lbl">連動</span><div class="link-btns">'
+        +'<button class="link-btn'+(iDA?' active':'')+'" id="lnk-days-'+f+'" onclick="setAuto('+f+',0)">天數</button>'
+        +'<button class="link-btn'+(iFA?' active':'')+'" id="lnk-fcr-'+f+'" onclick="setAuto('+f+',1)">FCR</button>'
+        +'<button class="link-btn'+(iAA?' active':'')+'" id="lnk-adfi-'+f+'" onclick="setAuto('+f+',2)">採食量</button>'
+        +'</div></div>';
+    }
+
+    body+='</div>';
+
+    body+='<div class="field-row-bot">'
+      +'<div class="cf-field mkt-field"><label>出豬牌價 元/kg</label><input type="number" id="mkt-'+f+'" value="'+mktPrice[f]+'" step="1" min="0" onchange="onMkt('+f+')"></div>'
+      +'</div>'
+      +'<div style="margin-top:8px"><label style="font-size:11px;color:#777">備註</label>'
+      +'<textarea id="note-'+f+'" rows="2" oninput="onNote('+f+',this)" style="width:100%;margin-top:3px;font-size:12px;padding:6px 8px;border-radius:8px;border:0.5px solid rgba(0,0,0,0.15);background:#fff;color:#1a1a1a;resize:none;font-family:inherit;line-height:1.5">'+notes[f]+'</textarea>'
+      +'</div>';
+
+    const rmBtn=f>0?'<button class="rm-btn" onclick="removeFeed('+f+')" title="移除此飼料">✕</button>':'';
+    return '<div class="fcard'+(fen[f]?'':' off')+'" id="fc-'+f+'" style="border-top:3px solid '+ACC[f]+'">'
+      +'<div class="fhdr"><input type="checkbox" '+(fen[f]?'checked':'')+' onchange="tgFeed('+f+',this)">'
+      +'<div class="fname-wrap"><span class="fname-icon">✏️</span><input class="fname" type="text" value="'+fnames[f]+'" oninput="onName('+f+',this)"></div>'
+      +rmBtn
+      +'</div>'
+      +'<div class="fbody">'+body+'</div></div>';
+  }).join('');
+}
+
+function calcFeed(f){
+  const mode=getMode();
+  let woutF,daysF,g;
+  if(mode==='free'){
+    woutF=wout_pf[f]; daysF=days_pf[f];
+    g=woutF-win_pf[f]; if(g<=0) return null;
+    fcr[f]=+(adfi[f]*daysF/g).toFixed(2);
+  } else if(mode==='days'){
+    daysF=lockedDaysVal;
+    if(af[f]===0){ if(fcr[f]<=0) return null; woutF=+(win_pf[f]+adfi[f]*daysF/fcr[f]).toFixed(1); }
+    else { woutF=wout_pf[f]; }
+    g=woutF-win_pf[f]; if(g<=0) return null;
+    if(af[f]===1) fcr[f]=+(adfi[f]*daysF/g).toFixed(2);
+    else if(af[f]===2) adfi[f]=+(fcr[f]*g/daysF).toFixed(2);
+  } else {
+    woutF=lockedWoutVal;
+    g=woutF-win_pf[f]; if(g<=0) return null;
+    if(af[f]===0){ if(adfi[f]<=0||fcr[f]<=0) return null; daysF=+(fcr[f]*g/adfi[f]).toFixed(1); }
+    else { daysF=days_pf[f]; }
+    if(af[f]===1) fcr[f]=+(adfi[f]*daysF/g).toFixed(2);
+    else if(af[f]===2) adfi[f]=+(fcr[f]*g/daysF).toFixed(2);
+  }
+  if(!daysF||daysF<=0||g<=0||fcr[f]<=0) return null;
+  const feedCost=price[f]*fcr[f]*g;
+  const pigletCost=piglet_pf[f];
+  const sale=mktPrice[f]*woutF;
+  const profit=sale-feedCost-pigletCost;
+  const bep=(feedCost+pigletCost)/woutF;
+  const cpk=feedCost/g;
+  return{feedCost,pigletCost,sale,profit,bep,cpk,g,daysF,woutF};
+}
+
+function calc(){
+  const res=[];
+  for(let f=0;f<feedCount;f++){ if(fen[f]){ const r=calcFeed(f); if(r) res.push({f,name:fnames[f],...r}); } }
+  const el=document.getElementById('results');
+  if(!res.length){ el.innerHTML='<p style="font-size:12px;color:#888">請啟用至少一個飼料</p>'; return; }
+  const showBest=res.length>1;
+  const best=showBest?res.reduce((a,b)=>b.profit>a.profit?b:a):null;
+
+  el.style.gridTemplateColumns='repeat('+Math.min(res.length,3)+',1fr)';
+  el.innerHTML=res.map(r=>{
+    const isBest=showBest&&r.f===best.f;
+    const profPos=r.profit>=0, gap=mktPrice[r.f]-r.bep;
+    return '<div class="rcard'+(isBest?' best':'')+'">'
+      +'<div class="rcard-name">'+r.name+(isBest?'<span class="badge">最高毛利</span>':'')+'</div>'
+      +'<div class="calc-box">'
+      +'<div class="cline"><span class="lbl">毛豬售價</span><span class="val">'+r.sale.toFixed(0)+' 元/頭</span></div>'
+      +'<div class="cline"><span class="lbl">飼料費</span><span class="val neg">− '+r.feedCost.toFixed(0)+' 元</span></div>'
+      +'<div class="cline"><span class="lbl">小豬成本</span><span class="val neg">− '+r.pigletCost.toFixed(0)+' 元</span></div>'
+      +'<hr class="divider">'
+      +'<div class="profit-row"><span class="profit-lbl">毛利/頭</span><span class="profit-val '+(profPos?'pos':'neg')+'">'+(profPos?'+':'')+r.profit.toFixed(0)+' 元</span></div>'
+      +'</div>'
+      +'<div class="bep-box"><div><div class="bep-lbl">損益點牌價</div><span class="bep-val">'+r.bep.toFixed(1)+' 元/kg</span><span class="bep-gap '+(gap>=0?'pos':'neg')+'">'+(gap>=0?'▲':'▼')+Math.abs(gap).toFixed(1)+' 元</span></div>'
+      +'<div style="text-align:right"><div class="bep-lbl">造肉成本</div><span class="bep-val">'+r.cpk.toFixed(2)+' 元/kg</span></div></div>'
+      +'</div>';
+  }).join('');
+}
+
+// ── localStorage 記錄 ─────────────────────────────────────
+function getTimestamp(){
+  const d=new Date();
+  return d.getFullYear()+'/'
+    +('0'+(d.getMonth()+1)).slice(-2)+'/'
+    +('0'+d.getDate()).slice(-2)+' '
+    +('0'+d.getHours()).slice(-2)+':'
+    +('0'+d.getMinutes()).slice(-2);
+}
+
+function updateRecCount(){
+  const records=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  const el=document.getElementById('rec-count');
+  if(el) el.textContent=records.length?'已儲存 '+records.length+' 筆':'';
+}
+
+function saveRecord(){
+  const records=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  const ts=getTimestamp();
+  let saved=0;
+  for(let f=0;f<feedCount;f++){
+    if(!fen[f]) continue;
+    const r=calcFeed(f);
+    if(!r) continue;
+    records.push({
+      時間:ts,
+      飼料名稱:fnames[f],
+      入重:win_pf[f],
+      小豬成本:piglet_pf[f],
+      飼料價格:price[f],
+      出重:+r.woutF.toFixed(1),
+      採食量:+adfi[f].toFixed(2),
+      飼養天數:+r.daysF.toFixed(0),
+      FCR:+fcr[f].toFixed(2),
+      出豬牌價:mktPrice[f],
+      毛豬售價:+r.sale.toFixed(0),
+      飼料費:+r.feedCost.toFixed(0),
+      毛利:+r.profit.toFixed(0),
+      損益點牌價:+r.bep.toFixed(1),
+      造肉成本:+r.cpk.toFixed(2),
+      備註:notes[f]
+    });
+    saved++;
+  }
+  if(!saved){ alert('無可儲存的有效試算結果'); return; }
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(records));
+  updateRecCount();
+  alert('✅ 已儲存 '+saved+' 筆記錄（'+ts+'）\n累計共 '+records.length+' 筆');
+}
+
+function exportAllRecords(){
+  const records=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  if(!records.length){ alert('尚無儲存記錄，請先按「儲存此次記錄」'); return; }
+  const headers=['時間','飼料名稱','入重(kg)','小豬成本(元)','飼料價格(元/kg)','出重(kg)','採食量(kg/天)','飼養天數(天)','FCR','出豬牌價(元/kg)','毛豬售價(元)','飼料費(元)','毛利(元)','損益點牌價(元/kg)','造肉成本(元/kg)','備註'];
+  const rows=[headers];
+  records.forEach(r=>{
+    rows.push([r.時間,r.飼料名稱,r.入重,r.小豬成本,r.飼料價格,r.出重,r.採食量,r.飼養天數,r.FCR,r.出豬牌價,r.毛豬售價,r.飼料費,r.毛利,r.損益點牌價,r.造肉成本,r.備註]);
+  });
+  const ws=XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols']=[{wch:16},{wch:12},{wch:9},{wch:13},{wch:15},{wch:9},{wch:14},{wch:13},{wch:7},{wch:15},{wch:12},{wch:10},{wch:10},{wch:16},{wch:14},{wch:24}];
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'造肉成本記錄');
+  const d=new Date();
+  const dateStr=d.getFullYear()+('0'+(d.getMonth()+1)).slice(-2)+('0'+d.getDate()).slice(-2);
+  XLSX.writeFile(wb,'造肉成本記錄_'+dateStr+'.xlsx');
+}
+
+function exportExcel(){
+  const rows=[['飼料名稱','入重(kg)','小豬成本(元)','飼料價格(元/kg)','出重(kg)','採食量(kg/天)','飼養天數(天)','FCR','出豬牌價(元/kg)','毛豬售價(元)','飼料費(元)','小豬成本(元)','毛利(元)','損益點牌價(元/kg)','造肉成本(元/kg)','備註']];
+  for(let f=0;f<feedCount;f++){
+    if(!fen[f]) continue;
+    const r=calcFeed(f);
+    if(!r) continue;
+    rows.push([fnames[f],win_pf[f],piglet_pf[f],price[f],+r.woutF.toFixed(1),+adfi[f].toFixed(2),+r.daysF.toFixed(0),+fcr[f].toFixed(2),mktPrice[f],+r.sale.toFixed(0),+r.feedCost.toFixed(0),+r.pigletCost.toFixed(0),+r.profit.toFixed(0),+r.bep.toFixed(1),+r.cpk.toFixed(2),notes[f]]);
+  }
+  const ws=XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols']=[{wch:12},{wch:9},{wch:13},{wch:15},{wch:9},{wch:14},{wch:13},{wch:7},{wch:15},{wch:12},{wch:10},{wch:12},{wch:10},{wch:16},{wch:14},{wch:24}];
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'造肉成本試算');
+  const d=new Date();
+  const dateStr=d.getFullYear()+('0'+(d.getMonth()+1)).slice(-2)+('0'+d.getDate()).slice(-2);
+  XLSX.writeFile(wb,'造肉成本試算_'+dateStr+'.xlsx');
+}
+
+function clearRecords(){
+  const records=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  if(!records.length){ alert('目前沒有儲存的記錄'); return; }
+  if(!confirm('確定清除全部 '+records.length+' 筆儲存記錄？此動作無法復原。')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  updateRecCount();
+  alert('記錄已清除');
+}
+
+buildFeeds();
+calc();
+updateRecCount();
+</script>
+</body>
+</html>
