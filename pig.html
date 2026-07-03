@@ -42,10 +42,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
 .cf-field input{width:100%;font-size:14px;padding:6px 8px;border-radius:8px;border:0.5px solid rgba(0,0,0,0.15);background:#fff;color:#1a1a1a;text-align:center}
 .cf-field input:focus{outline:none;border-color:#378ADD}
 .num-wrap{display:flex;align-items:stretch;gap:2px}
-.num-wrap input{flex:1;min-width:0}
+.num-wrap input{flex:1;min-width:48px}
 .step-btn{display:none}
 @media (hover:none) and (pointer:coarse){
-  .step-btn{background:#F0F0EC;border:0.5px solid rgba(0,0,0,0.15);border-radius:7px;font-size:17px;font-weight:300;color:#444;cursor:pointer;padding:0 11px;flex-shrink:0;-webkit-user-select:none;user-select:none;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
+  .step-btn{background:#F0F0EC;border:0.5px solid rgba(0,0,0,0.15);border-radius:7px;font-size:17px;font-weight:300;color:#444;cursor:pointer;padding:0 8px;flex-shrink:0;-webkit-user-select:none;user-select:none;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
   .step-btn:active{background:#D8D8D4}
 }
 .trio-item .num-wrap input{border-radius:6px}
@@ -111,7 +111,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
 .btn-export{background:#F0F0EC;color:#555;border:0.5px solid rgba(0,0,0,0.15)}.btn-export:hover{background:#E0E0DC}
 .btn-clear{background:none;color:#ccc;border:0.5px solid rgba(0,0,0,0.12);font-size:12px;padding:7px 12px}.btn-clear:hover{color:#A32D2D;border-color:#A32D2D}
 .rec-count{font-size:11px;color:#aaa;margin-left:4px}
-@media(max-width:600px){.feeds{grid-template-columns:1fr!important}.results{grid-template-columns:1fr!important}.field-row{flex-wrap:wrap}.btn-row{gap:6px}.action-btn{font-size:12px;padding:8px 12px}}
+@media(max-width:600px){.feeds{grid-template-columns:1fr!important}.results{grid-template-columns:1fr!important}.field-row{flex-wrap:wrap}.field-row .cf-field{flex:0 0 calc(50% - 4px)}.field-row .cf-field:last-child:nth-child(odd){flex:0 0 100%}.btn-row{gap:6px}.action-btn{font-size:12px;padding:8px 12px}}
 </style>
 </head>
 <body>
