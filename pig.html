@@ -174,7 +174,7 @@ function setVal(id,val){
 }
 function stepVal(id,delta,mn,mx){
   const el=document.getElementById(id); if(!el) return;
-  const v=Math.min(mx,Math.max(mn,((+el.value+delta).toFixed(4))));
+  const v=Math.min(mx,Math.max(mn,+(+el.value+delta).toFixed(4)));
   el.value=v;
 }
 function setupScrub(){
@@ -193,36 +193,617 @@ function setupScrub(){
       var st=+(el.step)||0.1;
       var mn=el.min!==''?+el.min:0;
       var mx=el.max!==''?+el.max:9999;
-  bf"6�VC��F��&�V�B��7b��G��R��7B��7B��7C��V��f�VSҲ��F��֖�ׂ��F��������6�VB���F�f��VB�B�����Ƿ76�fS�f�6Wғ��V��FDWfV�DƗ7FV�W"�wF�V6�V�Br�gV�7F��ₗ���b���f��r�V��F�7F6�WfV�B��WrWfV�B�v6��vRr������f��s�f�6S��ғ��ғ��Р���)H)H��FR)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H �gV�7F���vWDv��&���FR���&WGW&����FS���vGf�6VBrbfF�4��6�VB��vF�2s����FS���vGf�6VBrbgv�WD��6�VB��wv�WBs�vg&VRs�ЦgV�7F���vWDfVVD��FR�b���6��7Bv��vWDv��&���FR����b�v���vg&VRr�&WGW&�vӰ��b���FS���vGf�6VBrbf��F�d��6��eҒ&WGW&�v��F�e�r���F�d��6��eӰ�&WGW&�vg&VRs��Р�gV�7F���6WD��FR�җ����FS�Ӱ�F�7V�V�B�vWDV�V�V�D'��B�v'F��6���Rr��6�74��S�v��FR�'F�r������w6���Rs�r7F�fRs�rr���F�7V�V�B�vWDV�V�V�D'��B�v'F��Gf�6VBr��6�74��S�v��FR�'F�r������vGf�6VBs�r7F�fRs�rr���F�7V�V�B�vWDV�V�V�D'��B�vGbֆ��Br��7G��R�F�7�������vGf�6VBs�rs�v���Rs���b�����w6���Rr���F�4��6�VC�f�6S�v�WD��6�VC�f�6S�Ff�v��&���6�VC�f�6S����F�d��6��'&��fVVD6�V�B��f���V���Ff���6�VE�c�'&��fVVD6�V�B��f��f�6R���e���F�c�'&��fVVD6�V�B��f�����e�Ff��c�'&��fVVD6�V�B��f�����Т'V��DfVVG2���6�2����Р���)H)HfVVBFB�&V��fR)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H �gV�7F���FDfVVB�����b�fVVD6�V�C�����dTTE2�&WGW&㰢6��7B�fVVD6�V�B���f��W2�W6��~�;�ii�r�dTTE��$T�5�fVVD6�V�Eғ��fV��W6��G'VR��&�6R�W6��&�6U�ғ�Ff��W6��Ff��ғ�f7"�W6��f7%�ғ��v���b�W6��v���e�ғ��v�WE�b�W6���v�WE�e�ғ�F�5�b�W6��F�5�e�ғ��v�WE�b�W6��v�WE�e�ғ�ַE&�6R�W6��ַE&�6U�ғ�b�W6������FW2�W6��rr�����F�d��6��W6���V��Ff���6�VE�b�W6��f�6R��e���F�b�W6����e�Ff��b�W6�����fVVD6�V�B���WFFTFD'Fₓ�'V��DfVVG2���6�2����ЦgV�7F���&V��fTfVVB�b����b�6��f�&҂~z+�Z�z{���N8�r�f��W5�eҲ~8����r��&WGW&㰢f��W2�7Ɩ6R�b���fV��7Ɩ6R�b���&�6R�7Ɩ6R�b���Ff��7Ɩ6R�b����f7"�7Ɩ6R�b���v���b�7Ɩ6R�b����v�WE�b�7Ɩ6R�b���F�5�b�7Ɩ6R�b����v�WE�b�7Ɩ6R�b���ַE&�6R�7Ɩ6R�b���b�7Ɩ6R�b�����FW2�7Ɩ6R�b������F�d��6��7Ɩ6R�b���Ff���6�VE�b�7Ɩ6R�b���e���F�b�7Ɩ6R�b���e�Ff��b�7Ɩ6R�b����fVVD6�V�B�Ӷ�b�F�4��6�VG��v�WD��6�VB�c�'&��fVVD6�V�B��f�����WFFTFD'Fₓ�'V��DfVVG2���6�2����ЦgV�7F���WFFTFD'Fₗ�6��7B#�F�7V�V�B�vWDV�V�V�D'��B�vFB�fVVB�'F�r���b�"�"�F�6&�VC҆fVVD6�V�C�����dTTE2��Р���)H)H��F�f�GV���6�2)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H �gV�7F���F�vv�T��F�dF�2�b����b�vWDv��&���FR����vg&VRr�&WGW&㰢�b���F�d��6��e����vF�2r����F�d��6��e���V�òТV�6R���F�d��6��e��vF�2s�Ff���6�VE�e�e��f�6S�e���F�e�e���Т'V��DfVVG2���7��4WF���F�b�b��6�2����ЦgV�7F���F�vv�T��F�ev�WB�b����b�vWDv��&���FR����vg&VRr�&WGW&㰢�b���F�d��6��e����wv�WBr����F�d��6��e���V�òТV�6R���F�d��6��e��wv�WBs�Ff���6�VE�e�e��f�6S�e���F�e�e���Т'V��DfVVG2���7��4WF���F�b�b��6�2����ЦgV�7F���F�vv�T��F�dFf��b����b�Ff���6�VE�e�eҗ�Ff���6�VE�e�e��f�6S�ТV�6R�Ff���6�VE�e�e��G'VS���F�d��6��e���V�òe�Ff��e�e���Т'V��DfVVG2����b�Ff���6�VE�e�eҒ7��4WF�Ff���F�b�b��6�2����ЦgV�7F���6WDWF���F�b�b�b����b�c���"bfFf�v��&���6�VB�&WGW&㰢e���F�e�e��c�7��4WF���F�b�b��'V��DfVVG2���6�2����ЦgV�7F���6WDWF�Ff���F�b�b�b��e�Ff��e�e��c�7��4WF�Ff���F�b�b��'V��DfVVG2���6�2���Р���)H)Hv��&���6�2)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H �gV�7F���F�vv�TF�4��6��b����b�F�4��6�VB��F�4��6�VC�f�6S�ТV�6R���6�VDF�5f��F�5�e�eӶf�"��WB�����fVVD6�V�C�����F�5�e������6�VDF�5fòF�4��6�VC�G'VS�v�WD��6�VC�f�6S�c�'&��fVVD6�V�B��f����Т'V��DfVVG2���f�"��WB�����fVVD6�V�C������b�fV嶕Ғ7��4WF�v��&���6�2����ЦgV�7F���F�vv�Uv�WD��6��b����b�v�WD��6�VB��v�WD��6�VC�f�6S�ТV�6R���6�VEv�WEf��v�WE�e�eӶf�"��WB�����fVVD6�V�C�����v�WE�e������6�VEv�WEfòv�WD��6�VC�G'VS�F�4��6�VC�f�6S�c�'&��fVVD6�V�B��f����Т'V��DfVVG2���f�"��WB�����fVVD6�V�C������b�fV嶕Ғ7��4WF�v��&���6�2����ЦgV�7F���F�vv�TFf�v��&���6��b����b�Ff�v��&���6�VB��Ff�v��&���6�VC�f�6S�ТV�6R���6�VDFf�f��Ff��eӶf�"��WB�����fVVD6�V�C�����Ff�������6�VDFf�fòFf�v��&���6�VC�G'VS�Т'V��DfVVG2���6�2����ЦgV�7F���6WDWF�v��&b�b���b�c���"bfFf�v��&���6�VB�&WGW&�e�e��c�7��4WF�v��&b��'V��DfVVG2���6�2���Р���)H)H7��2WF�)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H �gV�7F���7��4WF�v��&b���6��7B��FS�vWDv��&���FR����b���FS���vg&VRr�&WGW&㰢6��7Bc�Ff�v��&���6�VC���6�VDFf�fæFf��eӰ��b���FS���vF�2r���6��7BC���6�VDF�5f��s�v�WE�e�e��v���e�eӰ��b�e�e�������b�f7%�e����v�WE�e�e�Ҳ�v���e�eҶb�B�f7%�eҒ�F�f��VB����6WEfwv�WB�r�b�v�WE�e�eғ�ТV�6R�b�e�e�������b�s���f7%�e�Ҳ�b�B�r��F�f��VB�"���6WEfvf7"�r�b�f7%�eғ�ТV�6R��b�C�bfs���Ff��e�Ҳ�f7%�eҦr�B��F�f��VB�"���6WEfvFf��r�b�Ff��eғ�Т�V�6R��6��7Bs���6�VEv�WEf��v���e�eӲ�b�s���&WGW&㰢�b�e�e�������b�c�bff7%�e����F�5�e�e���F��&�V�B�f7%�eҦr�b���6WEfvF�2�r�b�F�5�e�eғ�ТV�6R�b�e�e�������b�F�5�e�e����f7%�e�Ҳ�b�F�5�e�e��r��F�f��VB�"���6WEfvf7"�r�b�f7%�eғ�ТV�6R��b�F�5�e�e����Ff��e�Ҳ�f7%�eҦr�F�5�e�eҒ�F�f��VB�"���6WEfvFf��r�b�Ff��eғ�ТЧЦgV�7F���7��4WF���F�b�b����b���F�d��6��e���vWDv��&���FR����vg&VRr�&WGW&㰢6��7Bc�Ff�v��&���6�VC���6�VDFf�fæFf��eӰ�6��7Bc�e���F�e�eӰ��b���F�d��6��e����vF�2r���6��7BC�F�5�e�e��s�v�WE�e�e��v���e�eӰ��b�c������b�f7%�e����v�WE�e�e�Ҳ�v���e�eҶb�B�f7%�eҒ�F�f��VB����6WEfwv�WB�r�b�v�WE�e�eғ�ТV�6R�b�c������b�s���f7%�e�Ҳ�b�B�r��F�f��VB�"���6WEfvf7"�r�b�f7%�eғ�ТV�6R��b�C�bfs���Ff��e�Ҳ�f7%�eҦr�B��F�f��VB�"���6WEfvFf��r�b�Ff��eғ�Т�V�6R��6��7Bs�v�WE�e�e��v���e�eӲ�b�s���&WGW&㰢�b�c������b�c�bff7%�e����F�5�e�e���F��&�V�B�f7%�eҦr�b���6WEfvF�2�r�b�F�5�e�eғ�ТV�6R�b�c������b�F�5�e�e����f7%�e�Ҳ�b�F�5�e�e��r��F�f��VB�"���6WEfvf7"�r�b�f7%�eғ�ТV�6R��b�F�5�e�e����Ff��e�Ҳ�f7%�eҦr�F�5�e�eҒ�F�f��VB�"���6WEfvFf��r�b�Ff��eғ�ТЧЦgV�7F���7��4WF�Ff���F�b�b����b�Ff���6�VE�e�e���Ff�v��&���6�VG��vWDv��&���FR����vg&VRw�Ɩ�F�d��6��eҒ&WGW&㰢6��7Bc�Ff��e��c�e�Ff��e�e��s�v�WE�e�e��v���e�eӰ��b�c������b�f7%�e��bfF�5�e�e����v�WE�e�e�Ҳ�v���e�eҶb�F�5�e�e��f7%�eҒ�F�f��VB����6WEfwv�WB�r�b�v�WE�e�eғ�ТV�6R�b�c������b�s�bfF�5�e�e����f7%�e�Ҳ�b�F�5�e�e��r��F�f��VB�"���6WEfvf7"�r�b�f7%�eғ�ТV�6R��b�c�bfs�bff7%�e����F�5�e�e���F��&�V�B�f7%�eҦr�b���6WEfvF�2�r�b�F�5�e�eғ�ЧР���)H)HWFFRT�)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H �gV�7F���WFFUT�v��&b���6��7B��FS�vWDv��&���FR����b���FS���vg&VRr�&WGW&㰢6��7B�G3���FS���vF�2s��wv�WBr�vf7"r�vFf�uӥ�vF�2r�vf7"r�vFf�uӰ��G2�f�$V6����Bƒ��簢6��7B�4WF�҆e�e���֒�Ɩ��F�7V�V�B�vWDV�V�V�D'��B��B�r�r�b��&Fs�F�7V�V�B�vWDV�V�V�D'��B�v&r�r��B�r�r�b��'F��F�7V�V�B�vWDV�V�V�D'��B�v���r��B�r�r�b����b��������6�74��S֗4WF��vWF�֖�s�v��6�VB֖�s����F�6&�VC֗4WF�Т�b�&Fr��&Fr�6�74��S�w7FFR�&FvRr���4WF��vWF�s�v��6�VBr��&Fr�FW�D6��FV�C֗4WF��~(k��
->X�Rs�rs�Т�b�'F�'F��6�74��S�vƖ��'F�r���4WF��r7F�fRs�rr���ғ��ЦgV�7F���WFFUT���F�b�b����b���F�d��6��e���vWDv��&���FR����vg&VRr�&WGW&㰢6��7B�G3֖�F�d��6��e����vF�2s��wv�WBr�vf7"r�vFf�uӥ�vF�2r�vf7"r�vFf�uӰ��G2�f�$V6����Bƒ��簢6��7B�4WF�҆e���F�e�e���֒�Ɩ��F�7V�V�B�vWDV�V�V�D'��B��B�r�r�b��&Fs�F�7V�V�B�vWDV�V�V�D'��B�v&r�r��B�r�r�b��'F��F�7V�V�B�vWDV�V�V�D'��B�v���r��B�r�r�b����b��������6�74��S֗4WF��vWF�֖�s�v��6�VB֖�s����F�6&�VC֗4WF�Т�b�&Fr��&Fr�6�74��S�w7FFR�&FvRr���4WF��vWF�s�v��6�VBr��&Fr�FW�D6��FV�C֗4WF��~(k��
->X�Rs�rs�Т�b�'F�'F��6�74��S�vƖ��'F�r���4WF��r7F�fRs�rr���ғ��ЦgV�7F���WFFUT�Ff���F�b�b����b�Ff���6�VE�e�e���Ff�v��&���6�VG��vWDv��&���FR����vg&VRw�Ɩ�F�d��6��eҒ&WGW&㰢6��7Bc�e�Ff��e�eӰ���wv�WBr��Ųvf7"r��ŲvF�2r�%���f�$V6�����Bƕғ�簢6��7B�4WF�҇c��֒�Ɩ��F�7V�V�B�vWDV�V�V�D'��B��B�r�r�b��&Fs�F�7V�V�B�vWDV�V�V�D'��B�v&r�r��B�r�r�b��'F��F�7V�V�B�vWDV�V�V�D'��B�v���r��B�r�r�b����b��������6�74��S֗4WF��vWF�֖�s�v��6�VB֖�s����F�6&�VC֗4WF�Т�b�&Fr��&Fr�6�74��S�w7FFR�&FvRr���4WF��vWF�s�v��6�VBr��&Fr�FW�D6��FV�C֗4WF��~(k��
->X�Rs�rs�Т�b�'F�'F��6�74��S�vƖ��'F�r���4WF��r7F�fRs�rr���ғ��Р���)H)H��WB��F�W'2)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H �gV�7F�����v��b��v���e�e�ҶF�7V�V�B�vWDV�V�V�D'��B�wv���r�b��f�VS�&V6�4fVVB�b��6�2���ЦgV�7F�����Ff��b���6��7BcҶF�7V�V�B�vWDV�V�V�D'��B�vFf��r�b��f�VS���b�Ff�v��&���6�VB����6�VDFf�f��c�f�"��WB�����fVVD6�V�C������Ff�����c��b����b�6WEfvFf��r���b���ТV�6RFf��e��c��&V6�4fVVB�b��6�2����ЦgV�7F�����f7"�b��f7%�e�ҶF�7V�V�B�vWDV�V�V�D'��B�vf7"�r�b��f�VS�&V6�4fVVB�b��6�2���ЦgV�7F�����F�2�b��F�5�e�e�ҶF�7V�V�B�vWDV�V�V�D'��B�vF�2�r�b��f�VS�&V6�4fVVB�b��6�2���ЦgV�7F�����v�WEb�b��v�WE�e�e�ҶF�7V�V�B�vWDV�V�V�D'��B�wv�WB�r�b��f�VS�&V6�4fVVB�b��6�2���ЦgV�7F�����&�6R�b��&�6U�e�ҶF�7V�V�B�vWDV�V�V�D'��B�w&�6R�r�b��f�VS�6�2���ЦgV�7F�����ַB�b��ַE&�6U�e�ҶF�7V�V�B�vWDV�V�V�D'��B�vַB�r�b��f�VS�6�2���ЦgV�7F������v�WB�b���v�WE�e�e�ҶF�7V�V�B�vWDV�V�V�D'��B�w�v�WB�r�b��f�VS�6�2���ЦgV�7F���FtfVVB�b�6"��fV�e��6"�6�V6�VC�F�7V�V�B�vWDV�V�V�D'��B�vf2�r�b��6�74Ɨ7B�F�vv�R�v�fbr�6"�6�V6�VB��6�2���ЦgV�7F�������R�b�V�f��W5�e��V��f�VS�ЦgV�7F�������FR�b�V���FW5�e��V��f�VS�Р�gV�7F���&V6�4fVVB�b���6��7Bv��vWDv��&���FR�����b�v���vg&VRr��7��4WF�v��&b��WFFUT�v��&b��ТV�6R�b���F�d��6��eҗ�7��4WF���F�b�b��WFFUT���F�b�b��ТV�6R�b�Ff���6�VE�e�e�bbFf�v��&���6�VBbf��FS���vGf�6VBr��7��4WF�Ff���F�b�b��WFFUT�Ff���F�b�b��ТV�6R��6��7Bs�v�WE�e�e��v���e�eӰ��b�s�bfF�5�e�e����f7%�e�Ҳ�Ff��eҦF�5�e�e��r��F�f��VB�"��6WEfvf7"�r�b�f7%�eғ�ТЧР���)H)H'V��BfVVG2T�)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H �gV�7F���'V��DfVVG2����6��7B�4Gc҆��FS���vGf�6VBr���6��7BfVVG4V��F�7V�V�B�vWDV�V�V�D'��B�vfVVG2r���fVVG4V��7G��R�w&�EFV��FT6��V��3�w&WVB�r��F��֖�fVVD6�V�B�2��r�g"�s���fVVG4V����W$�D���'&��g&�҇��V�wF��fVVD6�V�G���b��簠�6��7Bf��vWDfVVD��FR�b���6��7Bc�Ff�v��&���6�VC���6�VDFf�fæFf��eӰ��WB&�G��rs�����F�&�p�&�G���s�F�b6�73�&f�V�B�&�r#�p��s�F�b6�73�&6b�f�V�B#���&V��XZ^�x��s���&V��p��s�F�b6�73�&�V��w&#��'WGF��6�73�'7FW�'F�"��6Ɩ6��'7FWf�wv���r�b�u�r���R�R�S����v��r�b�r�#�f֖�W3���'WGF���Ɩ�WBG�S�&�V�&W""�C�'v���r�b�r"f�VS�"r�v���e�eҲr"7FW�#�R"֖��#R"���#S"��6��vS�&��v��r�b�r�#��'WGF��6�73�'7FW�'F�"��6Ɩ6��'7FWf�wv���r�b�u�r��R�R�S����v��r�b�r�#��ȳ��'WGF�����F�c�p��s��F�c�p��s�F�b6�73�&6b�f�V�B#���&V��[���h�i��XX2��
-����&V��p��s�F�b6�73�&�V��w&#��'WGF��6�73�'7FW�'F�"��6Ɩ6��'7FWf�w�v�WB�r�b�u�r��S��#�����v�WB�r�b�r�#�f֖�W3���'WGF���Ɩ�WBG�S�&�V�&W""�C�'�v�WB�r�b�r"f�VS�"r��v�WE�e�eҲr"7FW�#S"֖��#"���##"��6��vS�&���v�WB�r�b�r�#��'WGF��6�73�'7FW�'F�"��6Ɩ6��'7FWf�w�v�WB�r�b�u�r�S��#�����v�WB�r�b�r�#��ȳ��'WGF�����F�c�p��s��F�c�p��s�F�b6�73�&6b�f�V�B#���&V��;�ii�X;�j�XX2��s���&V��p��s�F�b6�73�&�V��w&#��'WGF��6�73�'7FW�'F�"��6Ɩ6��'7FWf�w&�6R�r�b�u�r����2�S����&�6R�r�b�r�#�f֖�W3���'WGF���Ɩ�WBG�S�&�V�&W""�C�'&�6R�r�b�r"f�VS�"r�&�6U�eҲr"7FW�#�"֖��#2"���#S"��6��vS�&��&�6R�r�b�r�#��'WGF��6�73�'7FW�'F�"��6Ɩ6��'7FWf�w&�6R�r�b�u�r���2�S����&�6R�r�b�r�#��ȳ��'WGF�����F�c�p��s��F�c�p��s��F�c�s������&V�'V��FW"f�"G&��f�V�G0�gV�7F����&FW�B���6�G�R�v��6���6Ɩ6��v��6�7F�fR����WB3�FW�C���b��4Gb���6��7B�4��҆��F�d��6��e������6�G�R����b���6�G�R�2��r�'WGF��6�73�&��6��'F�r���4���r��6�VBs�rr��r"��6Ɩ6��'F�vv�Rr�����6�G�S���vF�2s�t��F�dF�2s�t��F�ev�WBr��r�r�b�r�"F�F�S�.X�X�^��nZ�#�r���4���	�I"s�	�I2r��s��'WGF���s���b�v��6���6Ɩ6��2��r�'WGF��6�73�&v��6��'F�r��v��6�7F�fS�rv��6�VBs�rr��r"��6Ɩ6��"r�v��6���6Ɩ6��r"F�F�S�.Y�j�^XZ��:��;�ii�#�XZ���'WGF���s��Т&WGW&�3��ТgV�7F���Ff��&����b��4Gb�&WGW&�~h��9��x��r�ZJ�s��6��7B�4��Ff���6�VE�e�e�bbFf�v��&���6�VC��&WGW&�~h��9��x��r�ZJ��'WGF��6�73�&��6��'F�r���4��r��6�VBs�rr��r"��6Ɩ6��'F�vv�T��F�dFf��r�b�r�"F�F�S�.X�X�^��nZ�#�r���4��	�I"s�	�I2r��s��'WGF���p��r�'WGF��6�73�&v��6��'F�r��Ff�v��&���6�VC�rv��6�VBs�rr��r"��6Ɩ6��'F�vv�TFf�v��&���6��r�b�r�"F�F�S�.Y�j�^XZ��:��;�ii�#�XZ���'WGF���s��ТgV�7F���Ɩ�&�r��'2���&WGW&�s�F�b6�73�&Ɩ��&�r#��7�6�73�&Ɩ���&�#�
->X�S��7���F�b6�73�&Ɩ��'F�2#�p���'2�����s�'WGF��6�73�&Ɩ��'F�r���7F�fS�r7F�fRs�rr��r"�C�&���r��B�r�r�b�r"��6Ɩ6��"r��f�r"r���F�3�rF�6&�VB7G��S�&�6�G���B"s�rr��s�r���&V²s��'WGF���r�����rr���s��F�c���F�c�s��ТgV�7F�������B�6�2�f��F�2���6��7B����ׂ���7C�7G�����������V������׃�ׇ�Ó������b�F�2�&WGW&�sƖ�WBG�S�&�V�&W""�C�"r��B�r"6�73�"r�6�2�r"f�VS�"r�f²r"7FW�"r�7B�r"֖��"r���r"F�6&�VC�s��&WGW&�s�F�b6�73�&�V��w&#�p��s�'WGF��6�73�'7FW�'F�"��6Ɩ6��'7FWf�rr��B�u�r�r���7B��r�r���r�r�ׂ�r��r���6��r#�f֖�W3���'WGF���p��sƖ�WBG�S�&�V�&W""�C�"r��B�r"6�73�"r�6�2�r"f�VS�"r�f²r"7FW�"r�7B�r"֖��"r���r"���"r�ׂ�r"��6��vS�"r���6��r#�p��s�'WGF��6�73�'7FW�'F�"��6Ɩ6��'7FWf�rr��B�u�r�r�7B�r�r���r�r�ׂ�r��r���6��r#��ȳ��'WGF���p��s��F�c�s��ТgV�7F���&FvR��B�6�2�G�B��&WGW&�s�7�6�73�'7FFR�&FvRr��6�7��rr��r"�C�"r���G��rr��r#�r��G�G��rr��s��7��s�Р�&�G���s�F�b6�73�'G&���&��#�s�����)H)Ht��$�D�2)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H ��b�f����vF�2r���6��7B�t҆e�e�����Ɣd҆e�e�����Ɣ҆e�e����"���6��7BFf����Ff���6�VE�e�e�bbFf�v��&���6�VBbb���&�G���s�F�b6�73�'G&���&�r#�p��s�F�b6�73�'G&��֗FV�#���&V��r��&~X{��x��rr�wv�WBr�wF�vv�Uv�WD��6��r�b�r�r�v�WD��6�VB��s���&V��p�����wv�WB�r�bƕt�vWF�֖�s�v��6�VB֖�r�v�WE�e�e�ƕt�v��v�WEb�r�b�r�r��R�3�3���&FvR�v&r�v�WB�r�bƕt�vWF�s�v��6�VBrƕt�~(k��
->X�Rs�rr��s��F�c�p���s�F�b6�73�'G&��֗FV�r��Ff�v��&���6�VC�rf�V�B���6�VBs�rr��r#���&V��r�Ff��&��s���&V��p�����vFf��r�b�Ff�v��&���6�VC�vWF�֖�s����vWF�֖�s��Ff����vWF�֖�s�v��6�VB֖�r���b�Ff�v��&���6�VG�Ɣ��Ff����v��Ff��r�b�r�r����RÂ���&FvR�v&r�Ff��r�bƔ�vWF�s�v��6�VBrƔ�~(k��
->X�Rs�rr��s��F�c�p��s��F�c�p���s�F�b6�73�'G&���&�r#�p��s�F�b6�73�'G&��֗FV�f�V�B���6�VB#���&V��;ΚH�ZJ�i[�ZJ�r���4Gc�s�'WGF��6�73�&��6��'F���6�VB"��6Ɩ6��'F�vv�TF�4��6��r�b�r�"F�F�S�.�z>��NXZ��:�Y�j�R#�	�I#��'WGF���s�rr��s���&V��p�����vF�2�r�b�vWF�֖�r���6�VDF�5f��G'VR�rr���&FvR���s��F�c�p���s�F�b6�73�'G&��֗FV�#���&V��d5#���&V��p�����vf7"�r�bƔd�vWF�֖�s�v��6�VB֖�r�f7%�e�Ɣd�v��f7"�r�b�r�r��R�Â���&FvR�v&r�f7"�r�bƔd�vWF�s�v��6�VBrƔd�~(k��
->X�Rs�rr��s��F�c�p��s��F�c�p���Ɩ�&�r�����C�wv�WBr��&Vâ~X{��x�r�7F�fS��t�f�w6WDWF�v��&r�b�r��w�����C�vf7"r��&Vâtd5"r�7F�fS��d�f�w6WDWF�v��&r�b�r��w�����C�vFf�r��&Vâ~h��9��x�r�7F�fS��bbFf�v��&���6�VB�f�w6WDWF�v��&r�b�r�"�r�F�3�Ff�v��&���6�VGТғ�����)H)Ht��$�t�UB)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H ��V�6R�b�f����wv�WBr���6��7B�D҆e�e�����Ɣd҆e�e�����Ɣ҆e�e����"���6��7BFf����Ff���6�VE�e�e�bbFf�v��&���6�VBbb���&�G���s�F�b6�73�'G&���&�r#�p��s�F�b6�73�'G&��֗FV�f�V�B���6�VB#���&V��X{��x��rr���4Gc�s�'WGF��6�73�&��6��'F���6�VB"��6Ɩ6��'F�vv�Uv�WD��6��r�b�r�"F�F�S�.�z>��NXZ��:�Y�j�R#�	�I#��'WGF���s�rr��s���&V��p�����wv�WB�r�b�vWF�֖�r���6�VEv�WEf��G'VR�rr���&FvR���s��F�c�p���s�F�b6�73�'G&��֗FV�r��Ff�v��&���6�VC�rf�V�B���6�VBs�rr��r#���&V��r�Ff��&��s���&V��p�����vFf��r�b�Ff�v��&���6�VC�vWF�֖�s����vWF�֖�s��Ff����vWF�֖�s�v��6�VB֖�r���b�Ff�v��&���6�VG�Ɣ��Ff����v��Ff��r�b�r�r����RÂ���&FvR�v&r�Ff��r�bƔ�vWF�s�v��6�VBrƔ�~(k��
->X�Rs�rr��s��F�c�p��s��F�c�p���s�F�b6�73�'G&���&�r#�p��s�F�b6�73�'G&��֗FV�#���&V��r��&~�;ΚH�ZJ�i[�ZJ�r�vF�2r�wF�vv�TF�4��6��r�b�r�r�F�4��6�VB��s���&V��p�����vF�2�r�bƔD�vWF�֖�s�v��6�VB֖�r�F�5�e�e�ƔD�v��F�2�r�b�r�r��3�3���&FvR�v&r�F�2�r�bƔD�vWF�s�v��6�VBrƔD�~(k��
->X�Rs�rr��s��F�c�p���s�F�b6�73�'G&��֗FV�#���&V��d5#���&V��p�����vf7"�r�bƔd�vWF�֖�s�v��6�VB֖�r�f7%�e�Ɣd�v��f7"�r�b�r�r��R�Â���&FvR�v&r�f7"�r�bƔd�vWF�s�v��6�VBrƔd�~(k��
->X�Rs�rr��s��F�c�p��s��F�c�p���Ɩ�&�r�����C�vF�2r��&Vâ~ZJ�i[�r�7F�fS��D�f�w6WDWF�v��&r�b�r��w�����C�vf7"r��&Vâtd5"r�7F�fS��d�f�w6WDWF�v��&r�b�r��w�����C�vFf�r��&Vâ~h��9��x�r�7F�fS��bbFf�v��&���6�VB�f�w6WDWF�v��&r�b�r�"�r�F�3�Ff�v��&���6�VGТғ�����)H)H��D�d�ET�D�2)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H ��V�6R�b�f����v��F�e�F�2r���6��7Bc�e���F�e�e�ƕt҇c����Ɣd҇c����Ɣ҇c���"���6��7BFf����Ff���6�VE�e�e�bbFf�v��&���6�VBbb���&�G���s�F�b6�73�'G&���&�r#�p��s�F�b6�73�'G&��֗FV�#���&V��r��&~X{��x��rr�wv�WBr�wF�vv�Uv�WD��6��r�b�r�r�v�WD��6�VB��s���&V��p�����wv�WB�r�bƕt�vWF�֖�s�v��6�VB֖�r�v�WE�e�e�ƕt�v��v�WEb�r�b�r�r��R�3�3���&FvR�v&r�v�WB�r�bƕt�vWF�s�v��6�VBrƕt�~(k��
->X�Rs�rr��s��F�c�p���s�F�b6�73�'G&��֗FV�r��Ff�v��&���6�VC�rf�V�B���6�VBs�rr��r#���&V��r�Ff��&��s���&V��p�����vFf��r�b�Ff�v��&���6�VC�vWF�֖�s����vWF�֖�s��Ff����vWF�֖�s�v��6�VB֖�r���b�Ff�v��&���6�VG�Ɣ��Ff����v��Ff��r�b�r�r����RÂ���&FvR�v&r�Ff��r�bƔ�vWF�s�v��6�VBrƔ�~(k��
->X�Rs�rr��s��F�c�p��s��F�c�p���s�F�b6�73�'G&���&�r#�p��s�F�b6�73�'G&��֗FV�f�V�B֖�F�b#���&V��;ΚH�ZJ�i[�ZJ��'WGF��6�73�&��6��'F���6�VB"��6Ɩ6��'F�vv�T��F�dF�2�r�b�r�"F�F�S�.�z>��NX�X�^��nZ�#�	�I#��'WGF���p��r�'WGF��6�73�&v��6��'F�r��F�4��6�VC�rv��6�VBs�rr��r"��6Ɩ6��'F�vv�TF�4��6��r�b�r�"F�F�S�.Y�j�^XZ��:��;�ii�#�XZ���'WGF������&V��p�����vF�2�r�b�vWF�֖�r�F�5�e�e��G'VR�rr���&FvR���s��F�c�p���s�F�b6�73�'G&��֗FV�#���&V��d5#���&V��p�����vf7"�r�bƔd�vWF�֖�s�v��6�VB֖�r�f7%�e�Ɣd�v��f7"�r�b�r�r��R�Â���&FvR�v&r�f7"�r�bƔd�vWF�s�v��6�VBrƔd�~(k��
->X�Rs�rr��s��F�c�p��s��F�c�p���Ɩ�&�r�����C�wv�WBr��&Vâ~X{��x�r�7F�fS��t�f�w6WDWF���F�b�r�b�r��w�����C�vf7"r��&Vâtd5"r�7F�fS��d�f�w6WDWF���F�b�r�b�r��w�����C�vFf�r��&Vâ~h��9��x�r�7F�fS��bbFf�v��&���6�VB�f�w6WDWF���F�b�r�b�r�"�r�F�3�Ff�v��&���6�VGТғ�����)H)H��D�d�ET�t�UB)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H ��V�6R�b�f����v��F�e�v�WBr���6��7Bc�e���F�e�e�ƔD҇c����Ɣd҇c����Ɣ҇c���"���6��7BFf����Ff���6�VE�e�e�bbFf�v��&���6�VBbb���&�G���s�F�b6�73�'G&���&�r#�p��s�F�b6�73�'G&��֗FV�f�V�B֖�F�b#���&V��X{��x��r�'WGF��6�73�&��6��'F���6�VB"��6Ɩ6��'F�vv�T��F�ev�WB�r�b�r�"F�F�S�.�z>��NX�X�^��nZ�#�	�I#��'WGF���p��r�'WGF��6�73�&v��6��'F�r��v�WD��6�VC�rv��6�VBs�rr��r"��6Ɩ6��'F�vv�Uv�WD��6��r�b�r�"F�F�S�.Y�j�^XZ��:��;�ii�#�XZ���'WGF������&V��p�����wv�WB�r�b�vWF�֖�r�v�WE�e�e��G'VR�rr���&FvR���s��F�c�p���s�F�b6�73�'G&��֗FV�r��Ff�v��&���6�VC�rf�V�B���6�VBs�rr��r#���&V��r�Ff��&��s���&V��p�����vFf��r�b�Ff�v��&���6�VC�vWF�֖�s����vWF�֖�s��Ff����vWF�֖�s�v��6�VB֖�r���b�Ff�v��&���6�VG�Ɣ��Ff����v��Ff��r�b�r�r����RÂ���&FvR�v&r�Ff��r�bƔ�vWF�s�v��6�VBrƔ�~(k��
->X�Rs�rr��s��F�c�p��s��F�c�p���s�F�b6�73�'G&���&�r#�p��s�F�b6�73�'G&��֗FV�#���&V��r��&~�;ΚH�ZJ�i[�ZJ�r�vF�2r�wF�vv�TF�4��6��r�b�r�r�F�4��6�VB��s���&V��p�����vF�2�r�bƔD�vWF�֖�s�v��6�VB֖�r�F�5�e�e�ƔD�v��F�2�r�b�r�r��3�3���&FvR�v&r�F�2�r�bƔD�vWF�s�v��6�VBrƔD�~(k��
->X�Rs�rr��s��F�c�p���s�F�b6�73�'G&��֗FV�#���&V��d5#���&V��p�����vf7"�r�bƔd�vWF�֖�s�v��6�VB֖�r�f7%�e�Ɣd�v��f7"�r�b�r�r��R�Â���&FvR�v&r�f7"�r�bƔd�vWF�s�v��6�VBrƔd�~(k��
->X�Rs�rr��s��F�c�p��s��F�c�p���Ɩ�&�r�����C�vF�2r��&Vâ~ZJ�i[�r�7F�fS��D�f�w6WDWF���F�b�r�b�r��w�����C�vf7"r��&Vâtd5"r�7F�fS��d�f�w6WDWF���F�b�r�b�r��w�����C�vFf�r��&Vâ~h��9��x�r�7F�fS��bbFf�v��&���6�VB�f�w6WDWF���F�b�r�b�r�"�r�F�3�Ff�v��&���6�VGТғ�����)H)He$TR)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H ��V�6R��6��7B��Ff���6�VE�e�e�bbFf�v��&���6�VC���b��4Gbbf������Ff���6�VC�Ɩ�vRX{��x��d5"�ZJ�i[��6��7Bc�e�Ff��e�e�ƕt҇c����Ɣd҇c����ƔD҇c���"���&�G���s�F�b6�73�'G&���&�r#�p��s�F�b6�73�'G&��֗FV�#���&V��r��&~X{��x��rr�wv�WBr�wF�vv�Uv�WD��6��r�b�r�r�v�WD��6�VB��s���&V��p�����wv�WB�r�bƕt�vWF�֖�s�v��6�VB֖�r�v�WE�e�e�ƕt�v��v�WEb�r�b�r�r��R�3�3���&FvR�v&r�v�WB�r�bƕt�vWF�s�v��6�VBrƕt�~(k��
->X�Rs�rr��s��F�c�p���s�F�b6�73�'G&��֗FV�f�V�B֖�F�b#���&V��h��9��x��r�ZJ��'WGF��6�73�&��6��'F���6�VB"��6Ɩ6��'F�vv�T��F�dFf��r�b�r�"F�F�S�.�z>��NX�X�^��nZ�#�	�I#��'WGF���p��r�'WGF��6�73�&v��6��'F�r��Ff�v��&���6�VC�rv��6�VBs�rr��r"��6Ɩ6��'F�vv�TFf�v��&���6��r�b�r�"F�F�S�.Y�j�^XZ��:��;�ii�#�XZ���'WGF������&V��p�����vFf��r�b�vWF�֖�r�b�G'VR�rr���&FvR�v&r�Ff��r�b��s��F�c�p��s��F�c�p���s�F�b6�73�'G&���&�r#�p��s�F�b6�73�'G&��֗FV�#���&V��r��&~�;ΚH�ZJ�i[�ZJ�r�vF�2r�wF�vv�TF�4��6��r�b�r�r�F�4��6�VB��s���&V��p�����vF�2�r�bƔD�vWF�֖�s�v��6�VB֖�r�F�5�e�e�ƔD�v��F�2�r�b�r�r��3�3���&FvR�v&r�F�2�r�bƔD�vWF�s�v��6�VBrƔD�~(k��
->X�Rs�rr��s��F�c�p���s�F�b6�73�'G&��֗FV�#���&V��d5#���&V��p�����vf7"�r�bƔd�vWF�֖�s�v��6�VB֖�r�f7%�e�Ɣd�v��f7"�r�b�r�r��R�Â���&FvR�v&r�f7"�r�bƔd�vWF�s�v��6�VBrƔd�~(k��
->X�Rs�rr��s��F�c�p��s��F�c�p���Ɩ�&�r�����C�wv�WBr��&Vâ~X{��x�r�7F�fS��t�f�w6WDWF�Ff���F�b�r�b�r��w�����C�vf7"r��&Vâtd5"r�7F�fS��d�f�w6WDWF�Ff���F�b�r�b�r��w�����C�vF�2r��&Vâ~ZJ�i[�r�7F�fS��D�f�w6WDWF�Ff���F�b�r�b�r�"�wТғ���V�6R����W&Rg&VP�6��7Bs�v�WE�e�e��v���e�eӰ�6��7Bf7$҆s�bfF�5�e�e����Ff��eҦF�5�e�e��r��F�f��VB�"��f7%�eӰ�&�G���s�F�b6�73�'G&���&�r#�p��s�F�b6�73�'G&��֗FV�#���&V��r��&~X{��x��rr�wv�WBr�wF�vv�Uv�WD��6��r�b�r�r�v�WD��6�VB��s���&V��p�����wv�WB�r�b�v��6�VB֖�r�v�WE�e�e��f�6R�v��v�WEb�r�b�r�r��R�3�3��s��F�c�p���s�F�b6�73�'G&��֗FV�r��Ff�v��&���6�VC�rf�V�B���6�VBs�rr��r#���&V��r�Ff��&��s���&V��p�����vFf��r�b�Ff�v��&���6�VC�vWF�֖�s�v��6�VB֖�r�b�Ff�v��&���6�VB�v��Ff��r�b�r�r����RÂ��s��F�c�p��s��F�c�p���s�F�b6�73�'G&���&�r#�p��s�F�b6�73�'G&��֗FV�#���&V��r��&~�;ΚH�ZJ�i[�ZJ�r�vF�2r�wF�vv�TF�4��6��r�b�r�r�F�4��6�VB��s���&V��p�����vF�2�r�b�v��6�VB֖�r�F�5�e�e��f�6R�v��F�2�r�b�r�r��3�3��s��F�c�p���s�F�b6�73�'G&��֗FV�#���&V��d5"�7�6�73�&f7"�WF��Fr#�(k��
->X�S��7�����&V��p��sƖ�WBG�S�&�V�&W""�C�&f7"�r�b�r"6�73�&WF�֖�"f�VS�"r�f7$�r"F�6&�VC���F�c�p��s��F�c�s��ТР�&�G���s��F�c�s���G&���&������&�GF��&�p�&�G���s�F�b6�73�&f�V�B�&�r�&�B#�p��s�F�b6�73�&6b�f�V�BַB�f�V�B#���&V��X{���x��X;�XX2��s���&V��p��s�F�b6�73�&�V��w&#��'WGF��6�73�'7FW�'F�"��6Ɩ6��'7FWf�vַB�r�b�u�r���#�#����ַB�r�b�r�#�f֖�W3���'WGF���Ɩ�WBG�S�&�V�&W""�C�&ַB�r�b�r"f�VS�"r�ַE&�6U�eҲr"7FW�#"֖��##"���##"��6��vS�&��ַB�r�b�r�#��'WGF��6�73�'7FW�'F�"��6Ɩ6��'7FWf�vַB�r�b�u�r��#�#����ַB�r�b�r�#��ȳ��'WGF�����F�c�p��s��F�c�p��s��F�c�s��&�G���s�F�b7G��S�&�&v���F����#���&V�7G��S�&f��B�6��S���6���#�3ssr#�X)�������&V��p��s�FW�F&V�C�&��FR�r�b�r"&�w3�#""���WC�&����FR�r�b�r�F��2�"7G��S�'v�GF��S��&v���F��7��f��B�6��S�'��FF��s�g����&�&FW"�&F�W3����&�&FW#��W�6�ƖB&v&�����R��&6�w&�V�C�6ffc�6���#�3�&W6��S����S�f��B�f֖Ǔ���W&�C�Ɩ�RֆV�v�C��R#�r���FW5�eҲs��FW�F&V�p��s��F�c�s���6��7B&�'F��c��s�'WGF��6�73�'&��'F�"��6Ɩ6��'&V��fTfVVB�r�b�r�"F�F�S�.z{���Nj�N�;�ii�#�)�S��'WGF���s�rs��&WGW&�s�F�b6�73�&f6&Br��fV�e��rs�r�fbr��r"�C�&f2�r�b�r"7G��S�&&�&FW"�F��7�6�ƖBr�45�eҲr#�p��s�F�b6�73�&f�G"#�Ɩ�WBG�S�&6�V6�&��"r��fV�e��v6�V6�VBs�rr��r��6��vS�'FtfVVB�r�b�r�F��2�#�p��s�F�b6�73�&f��R�w&#��7�6�73�&f��R֖6��#�)�������7��Ɩ�WB6�73�&f��R"G�S�'FW�B"f�VS�"r�f��W5�eҲr"���WC�&����R�r�b�r�F��2�#���F�c�p��s�7��C�&&W7B�&FvR�r�b�r#���7��p��&�'F�s��F�c�p��s�F�b6�73�&f&�G�#�r�&�G��s��F�c���F�c�s��Ғ����rr���6WGW67'V"����Р���)H)H6�4fVVB)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H �gV�7F���6�4fVVB�b���6��7Bf��vWDfVVD��FR�b���6��7Bc�Ff�v��&���6�VC���6�VDFf�fæFf��eӰ��WBv�WDb�F�4b�s����b�f����vF�2r���F�4c���6�VDF�5fð��b�e�e�������b�f7%�e����&WGW&��V�òv�WDcҲ�v���e�eҶb�F�4b�f7%�eҒ�F�f��VB���ТV�6Rv�WDc�v�WE�e�eӰ�s�v�WDb�v���e�eӲ�b�s���&WGW&��V�ð��b�e�e�����f7%�e�Ҳ�b�F�4b�r��F�f��VB�"���V�6R�b�e�e����"bbFf�v��&���6�VB�Ff��e�Ҳ�f7%�eҦr�F�4b��F�f��VB�"����V�6R�b�f����wv�WBr���v�WDc���6�VEv�WEfòs�v�WDb�v���e�eӲ�b�s���&WGW&��V�ð��b�e�e�������b�c����f7%�e����&WGW&��V�òF�4cҲ�f7%�eҦr�b��F�f��VB���ТV�6RF�4c�F�5�e�eӰ��b�e�e�����f7%�e�Ҳ�b�F�4b�r��F�f��VB�"���V�6R�b�e�e����"bbFf�v��&���6�VB�Ff��e�Ҳ�f7%�eҦr�F�4b��F�f��VB�"����V�6R�b�f����v��F�e�F�2r���6��7Bc�e���F�e�eӲF�4c�F�5�e�eӰ��b�c������b�f7%�e����&WGW&��V�òv�WDcҲ�v���e�eҶb�F�4b�f7%�eҒ�F�f��VB���v�WE�e�e��v�WDc�ТV�6Rv�WDc�v�WE�e�eӰ�s�v�WDb�v���e�eӲ�b�s���&WGW&��V�ð��b�c����f7%�e�Ҳ�b�F�4b�r��F�f��VB�"���V�6R�b�c���"bbFf�v��&���6�VB�Ff��e�Ҳ�f7%�eҦr�F�4b��F�f��VB�"����V�6R�b�f����v��F�e�v�WBr���6��7Bc�e���F�e�eӲv�WDc�v�WE�e�eӲs�v�WDb�v���e�eӲ�b�s���&WGW&��V�ð��b�c������b�c����f7%�e����&WGW&��V�òF�4cҲ�f7%�eҦr�b��F�f��VB���F�5�e�e�ҶF�4c�ТV�6RF�4c�F�5�e�eӰ��b�c����f7%�e�Ҳ�b�F�4b�r��F�f��VB�"���V�6R�b�c���"bbFf�v��&���6�VB�Ff��e�Ҳ�f7%�eҦr�F�4b��F�f��VB�"����V�6R��6��7B��Ff���6�VE�e�e�bbFf�v��&���6�VBbf��FS���vGf�6VBs���b�����6��7Bc�e�Ff��e�eӲv�WDc�v�WE�e�eӲF�4c�F�5�e�eӰ��b�c������b�f7%�e�����F�4c���&WGW&��V�òv�WDcҲ�v���e�eҶb�F�4b�f7%�eҒ�F�f��VB���v�WE�e�e��v�WDc�Тs�v�WDb�v���e�eӲ�b�s���&WGW&��V�ð��b�c���"���b�c����f7%�e����&WGW&��V�òF�4c��F��&�V�B�f7%�eҦr�b��F�5�e�e��F�4c�Т�b�c����f7%�e�Ҳ�b�F�4b�r��F�f��VB�"����V�6R��v�WDc�v�WE�e�eӲF�4c�F�5�e�eӰ�s�v�WDb�v���e�eӲ�b�s���&WGW&��V�ð�f7%�e�Ҳ�b�F�4b�r��F�f��VB�"���ТР��b�F�4g��F�4c����w��s����f7%�e����&WGW&��V�ð�6��7BfVVD6�7C�&�6U�eҦf7%�eҦs��6��7B�v�WD6�7C��v�WE�e�eӰ�6��7B6�S�ַE&�6U�eҧv�WDc��6��7B&�f�C�6�R�fVVD6�7B��v�WD6�7C��6��7B&W҆fVVD6�7B��v�WD6�7B��v�WDc��6��7B7��fVVD6�7B�s��&WGW&�fVVD6�7B��v�WD6�7B�6�R�&�f�B�&W�7��r�F�4b�v�WDgӰ�Р���)H)H6�2b&W7V�G2)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H �gV�7F���6�2����6��7B&W3յӰ�f�"��WBc��c�fVVD6�V�C�b�����b�fV�eҗ�6��7B#�6�4fVVB�b���b�"�&W2�W6���b���S�f��W5�e�����'ғ��Тf�"��WBc��c�fVVD6�V�C�b����6��7B&#�F�7V�V�B�vWDV�V�V�D'��B�v&W7B�&FvR�r�b���b�&"�&"���W$�D���rs�Т6��7BV��F�7V�V�B�vWDV�V�V�D'��B�w&W7V�G2r����b�&W2��V�wF���V����W$�D���s�7G��S�&f��B�6��S�'��6���#�3���#�YY�yJ��{>[	K�X��;�ii����s�&WGW&�Т6��7B&FvT�׷Ӱ��b�&W2��V�wF�����6��7B����F��������&W2���#���F��&�V�B�"�&�f�B�����6��7BF��&W2�f��FW"�#���F��&�V�B�"�&�f�B����������b�F���V�wF��&W2��V�wF����6��7BG�C�F���V�wF���~i����j��X���[�>X�b�s�~i����j��X��s��F��f�$V6��#��&FvT��"�e��G�C�ғ��ТТV��7G��R�w&�EFV��FT6��V��3�w&WVB�r��F��֖�&W2��V�wF��2��r�g"�s��V����W$�D���&W2���#�簢6��7B&FvS�&FvT��"�e���rrƗ4&W7C�&FvS��6��7B&�e�3�"�&�f�C���v�ַE&�6U�"�e��"�&W��6��7B&#�F�7V�V�B�vWDV�V�V�D'��B�v&W7B�&FvR�r�"�b����b�&"�&"���W$�D���&FvS�s�7�6�73�&&FvR�G"�&FvR#�r�&FvR�s��7��s�rs��&WGW&�s�F�b6�73�'&6&Br���4&W7C�r&W7Bs�rr��r#�p��s�F�b6�73�'&6&B���R#�r�"���R��&FvS�s�7�6�73�&&FvR#�r�&FvR�s��7��s�rr��s��F�c�p��s�F�b6�73�&6�2�&��#�p��s�F�b6�73�&6Ɩ�R#��7�6�73�&�&�#�j����YJ�X;���7���7�6�73�'f�#�r�"�6�R�F�f��VB���rXX2��
-���7����F�c�p��s�F�b6�73�&6Ɩ�R#��7�6�73�&�&�#�;�ii��+���7���7�6�73�'f��Vr#�(�"r�"�fVVD6�7B�F�f��VB���rXX3��7����F�c�p��s�F�b6�73�&6Ɩ�R#��7�6�73�&�&�#�[���h�i����7���7�6�73�'f��Vr#�(�"r�"��v�WD6�7B�F�f��VB���rXX3��7����F�c�p��sƇ"6�73�&F�f�FW"#�p��s�F�b6�73�'&�f�B�&�r#��7�6�73�'&�f�B��&�#�j��X����
-���7���7�6�73�'&�f�B�f�r��&�e�3�w�2s�v�Vrr��r#�r��&�e�3�r�s�rr��"�&�f�B�F�f��VB���rXX3��7����F�c�p��s��F�c�p��s�F�b6�73�&&W�&��#��F�c��F�b6�73�&&W��&�#�i�y�����x��X;���F�c��7�6�73�&&W�f�#�r�"�&W�F�f��VB���rXX2��s��7���7�6�73�&&W�vr��v���w�2s�v�Vrr��r#�r��v���~)k"s�~)k�r���F��'2�v��F�f��VB���rXX3��7����F�c�p��s�F�b7G��S�'FW�B�Ɩv�&�v�B#��F�b6�73�&&W��&�#�
-�(�h�i����F�c��7�6�73�&&W�f�#�r�"�7��F�f��VB�"��rXX2��s��7����F�c���F�c�p��s��F�c�s��Ғ����rr���Р���)H)H��6�7F�&vR)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H)H �gV�7F���vWEF��W7F�����6��7BC��WrFFR����&WGW&�B�vWDgV�ŖV"���r�p���sr��B�vWD���F�������6Ɩ6R��"��r�p���sr�B�vWDFFR����6Ɩ6R��"��rp���sr�B�vWD��W'2����6Ɩ6R��"��s�p���sr�B�vWD֖�WFW2����6Ɩ6R��"���ЦgV�7F���WFFU&V46�V�B����6��7B&V6�&G3ԥ4���'6R���6�7F�&vR�vWD�FV҅5D�$tU��U����u��r���6��7BV��F�7V�V�B�vWDV�V�V�D'��B�w&V2�6�V�Br����b�VV��FW�D6��FV�C�&V6�&G2��V�wF��~[{.XK.Zقr�&V6�&G2��V�wF��rz�bs�rs��ЦgV�7F���6fU&V6�&B����6��7B&V6�&G3ԥ4���'6R���6�7F�&vR�vWD�FV҅5D�$tU��U����u��r���6��7BG3�vWEF��W7F�����WB6fVC���f�"��WBc��c�fVVD6�V�C�b������b�fV�eҒ6��F��VS�6��7B#�6�4fVVB�b���b�"�6��F��VS��&V6�&G2�W6���i�.�i3�G2Κ;�ii�Y�z��f��W5�e��XZ^�xӧv���e�e��[���h�i�ç�v�WE�e�e�Κ;�ii�X;�jç&�6U�e���X{��xӢ�"�v�WDb�F�f��VB���h��9��x�Ff��e��F�f��VB�"�Κ;ΚH�ZJ�i[���"�F�4b�F�f��VB���d5#��f7%�e��F�f��VB�"���X{���x��X;��ַE&�6U�e��j����YJ�X;���"�6�R�F�f��VB��Κ;�ii��+���"�fVVD6�7B�F�f��VB���j��X����"�&�f�B�F�f��VB����i�y�����x��X;���"�&W�F�f��VB��Θ
-�(�h�i�â�"�7��F�f��VB�"��X)�������FW5�e�ғ�6fVB����Т�b�6fVB���W'B�~xJX��XK.Zَy�NiȞiX���nz�~{Yi��r��&WGW&�Т��6�7F�&vR�6WD�FV҅5D�$tU��U�ĥ4���7G&��v�g��&V6�&G2���WFFU&V46�V�B�����W'B�~)�R[{.XK.Zقr�6fVB�rz�n�����N�Ȃr�G2�~�ȕ��{J����X[r�&V6�&G2��V�wF��rz�br���ЦgV�7F���W��'D��&V6�&G2����6��7B&V6�&G3ԥ4���'6R���6�7F�&vR�vWD�FV҅5D�$tU��U����u��r����b�&V6�&G2��V�wF����W'B�~[	�xJXK.Zَ�����N��Ί��XX�hȞ8�XK.Zَj�Nj������N8�r��&WGW&�Т6��7B�VFW'3ղ~i�.�i2r�~�;�ii�Y�z�r�~XZ^�x҆�r�r�~[���h�i�XX2�r�~�;�ii�X;�jXX2��r�r�~X{��x҆�r�r�~h��9��x�r�ZJ��r�~�;ΚH�ZJ�i[��ZJ��r�td5"r�~X{���x��X;��XX2��r�r�~j����YJ�X;��XX2�r�~�;�ii��+��XX2�r�~j��X���XX2�r�~i�y�����x��X;��XX2��r�r�~�
-�(�h�i�XX2��r�r�~X)����uӰ�6��7B&�w3ն�VFW'5Ӱ�&V6�&G2�f�$V6��#��&�w2�W6���"�i�.�i2�"�;�ii�Y�z��"�XZ^�x��"�[���h�i���"�;�ii�X;�j��"�X{��x��"�h��9��x��"�;ΚH�ZJ�i[��"�d5"�"�X{���x��X;��"�j����YJ�X;��"�;�ii��+��"�j��X���"�i�y�����x��X;��"�
-�(�h�i���"�X)����Ғ���6��7Bw3Մ�5��WF��2���F��6�VWB�&�w2���w5�r6��2u�շ�v6��g�Ƿv6��'�Ƿv6����Ƿv6��7�Ƿv6��W�Ƿv6����Ƿv6��G�Ƿv6��7�Ƿv6��w�Ƿv6��W�Ƿv6��'�Ƿv6���Ƿv6���Ƿv6��g�Ƿv6��G�Ƿv6��#G�Ӱ�6��7Bv#Մ�5��WF��2�&�����Wr�����5��WF��2�&����V�E�6�VWB�v"�w2�~�
-�(�h�i�Ί����Br���6��7BC��WrFFR���6��7BG3�B�vWDgV�ŖV"����sr��B�vWD���F�������6Ɩ6R��"���sr�B�vWDFFR����6Ɩ6R��"�����5��w&�FTf��R�v"�~�
-�(�h�i�Ί����E�r�G2�r��7�r���ЦgV�7F���W��'DW�6V���6��7B&�w3յ�~�;�ii�Y�z�r�~XZ^�x҆�r�r�~[���h�i�XX2�r�~�;�ii�X;�jXX2��r�r�~X{��x҆�r�r�~h��9��x�r�ZJ��r�~�;ΚH�ZJ�i[��ZJ��r�td5"r�~X{���x��X;��XX2��r�r�~j����YJ�X;��XX2�r�~�;�ii��+��XX2�r�~[���h�i�XX2�r�~j��X���XX2�r�~i�y�����x��X;��XX2��r�r�~�
-�(�h�i�XX2��r�r�~X)����u�Ӱ�f�"��WBc��c�fVVD6�V�C�b������b�fV�eҒ6��F��VS�6��7B#�6�4fVVB�b���b�"�6��F��VS��&�w2�W6���f��W5�e��v���e�e���v�WE�e�e��&�6U�e�·"�v�WDb�F�f��VB��¶Ff��e��F�f��VB�"�·"�F�4b�F�f��VB��¶f7%�e��F�f��VB�"��ַE&�6U�e�·"�6�R�F�f��VB��·"�fVVD6�7B�F�f��VB��·"��v�WD6�7B�F�f��VB��·"�&�f�B�F�f��VB��·"�&W�F�f��VB��·"�7��F�f��VB�"����FW5�e�ғ��Т6��7Bw3Մ�5��WF��2���F��6�VWB�&�w2���w5�r6��2u�շ�v6��'�Ƿv6����Ƿv6��7�Ƿv6��W�Ƿv6����Ƿv6��G�Ƿv6��7�Ƿv6��w�Ƿv6��W�Ƿv6��'�Ƿv6���Ƿv6��'�Ƿv6���Ƿv6��g�Ƿv6��G�Ƿv6��#G�Ӱ�6��7Bv#Մ�5��WF��2�&�����Wr�����5��WF��2�&����V�E�6�VWB�v"�w2�~�
-�(�h�i�Ί�nz�rr���6��7BC��WrFFR���6��7BG3�B�vWDgV�ŖV"����sr��B�vWD���F�������6Ɩ6R��"���sr�B�vWDFFR����6Ɩ6R��"�����5��w&�FTf��R�v"�~�
-�(�h�i�Ί�nz�u�r�G2�r��7�r���ЦgV�7F���6�V%&V6�&G2����6��7B&V6�&G3ԥ4���'6R���6�7F�&vR�vWD�FV҅5D�$tU��U����u��r����b�&V6�&G2��V�wF����W'B�~y��X��k).iȞXK.Zَy�N�����Br��&WGW&�Т�b�6��f�&҂~z+�Z�k�^��NXZ��:�r�&V6�&G2��V�wF��rz�nXK.Zَ�����N���j�NX�^K��xJk9^[�X��8"r��&WGW&㰢��6�7F�&vR�&V��fT�FV҅5D�$tU��U���WFFU&V46�V�B����W'B�~�����N[{.k�^��Br���Р�'V��DfVVG2���6�2���WFFU&V46�V�B������67&�C���&�G�����F���
+      var snapped=Math.round((sv+(dx/15)*st)/st)*st;
+      el.value=+(Math.min(mx,Math.max(mn,snapped)).toFixed(4));
+    },{passive:false});
+    el.addEventListener('touchend',function(){
+      if(moving) el.dispatchEvent(new Event('change'));
+      moving=false;
+    });
+  });
+}
+
+// ── Mode ───────────────────────────────────────────────────
+function getGlobalMode(){ return (appMode==='advanced'&&daysLocked)?'days':(appMode==='advanced'&&woutLocked)?'wout':'free'; }
+function getFeedMode(f){
+  const gm=getGlobalMode(); if(gm!=='free') return gm;
+  if(appMode==='advanced'&&indivLock[f]) return 'indiv_'+indivLock[f];
+  return 'free';
+}
+
+function setAppMode(m){
+  appMode=m;
+  document.getElementById('btn-simple').className='mode-btn'+(m==='simple'?' active':'');
+  document.getElementById('btn-advanced').className='mode-btn'+(m==='advanced'?' active':'');
+  document.getElementById('adv-hint').style.display=m==='advanced'?'':'none';
+  if(m==='simple'){
+    daysLocked=false;woutLocked=false;adfiGlobalLocked=false;
+    indivLock=Array(feedCount).fill(null);
+    adfiLocked_f=Array(feedCount).fill(false);
+    af_indiv=Array(feedCount).fill(1);
+    af_adfi_f=Array(feedCount).fill(1);
+  }
+  buildFeeds();calc();
+}
+
+// ── Feed add/remove ────────────────────────────────────────
+function addFeed(){
+  if(feedCount>=MAX_FEEDS) return;
+  const p=feedCount-1;
+  fnames.push('飼料 '+FEED_LABELS[feedCount]);
+  fen.push(true);price.push(price[p]);adfi.push(adfi[p]);fcr.push(fcr[p]);
+  win_pf.push(win_pf[p]);piglet_pf.push(piglet_pf[p]);days_pf.push(days_pf[p]);
+  wout_pf.push(wout_pf[p]);mktPrice.push(mktPrice[p]);af.push(1);notes.push('');
+  indivLock.push(null);adfiLocked_f.push(false);af_indiv.push(1);af_adfi_f.push(1);
+  feedCount++;updateAddBtn();buildFeeds();calc();
+}
+function removeFeed(f){
+  if(!confirm('確定移除「'+fnames[f]+'」？')) return;
+  fnames.splice(f,1);fen.splice(f,1);price.splice(f,1);adfi.splice(f,1);
+  fcr.splice(f,1);win_pf.splice(f,1);piglet_pf.splice(f,1);days_pf.splice(f,1);
+  wout_pf.splice(f,1);mktPrice.splice(f,1);af.splice(f,1);notes.splice(f,1);
+  indivLock.splice(f,1);adfiLocked_f.splice(f,1);af_indiv.splice(f,1);af_adfi_f.splice(f,1);
+  feedCount--;if(daysLocked||woutLocked) af=Array(feedCount).fill(1);
+  updateAddBtn();buildFeeds();calc();
+}
+function updateAddBtn(){ const b=document.getElementById('add-feed-btn'); if(b) b.disabled=(feedCount>=MAX_FEEDS); }
+
+// ── Individual locks ───────────────────────────────────────
+function toggleIndivDays(f){
+  if(getGlobalMode()!=='free') return;
+  if(indivLock[f]==='days'){ indivLock[f]=null; }
+  else { indivLock[f]='days'; adfiLocked_f[f]=false; af_indiv[f]=1; }
+  buildFeeds();syncAutoIndiv(f);calc();
+}
+function toggleIndivWout(f){
+  if(getGlobalMode()!=='free') return;
+  if(indivLock[f]==='wout'){ indivLock[f]=null; }
+  else { indivLock[f]='wout'; adfiLocked_f[f]=false; af_indiv[f]=1; }
+  buildFeeds();syncAutoIndiv(f);calc();
+}
+function toggleIndivAdfi(f){
+  if(adfiLocked_f[f]){ adfiLocked_f[f]=false; }
+  else { adfiLocked_f[f]=true; indivLock[f]=null; af_adfi_f[f]=1; }
+  buildFeeds();if(adfiLocked_f[f]) syncAutoAdfiIndiv(f);calc();
+}
+function setAutoIndiv(f,v){
+  if(v===2&&adfiGlobalLocked) return;
+  af_indiv[f]=v;syncAutoIndiv(f);buildFeeds();calc();
+}
+function setAutoAdfiIndiv(f,v){ af_adfi_f[f]=v;syncAutoAdfiIndiv(f);buildFeeds();calc(); }
+
+// ── Global locks ───────────────────────────────────────────
+function toggleDaysLock(f){
+  if(daysLocked){ daysLocked=false; }
+  else { lockedDaysVal=days_pf[f];for(let i=0;i<feedCount;i++) days_pf[i]=lockedDaysVal; daysLocked=true;woutLocked=false;af=Array(feedCount).fill(1); }
+  buildFeeds();for(let i=0;i<feedCount;i++) if(fen[i]) syncAutoGlobal(i);calc();
+}
+function toggleWoutLock(f){
+  if(woutLocked){ woutLocked=false; }
+  else { lockedWoutVal=wout_pf[f];for(let i=0;i<feedCount;i++) wout_pf[i]=lockedWoutVal; woutLocked=true;daysLocked=false;af=Array(feedCount).fill(1); }
+  buildFeeds();for(let i=0;i<feedCount;i++) if(fen[i]) syncAutoGlobal(i);calc();
+}
+function toggleAdfiGlobalLock(f){
+  if(adfiGlobalLocked){ adfiGlobalLocked=false; }
+  else { lockedAdfiVal=adfi[f];for(let i=0;i<feedCount;i++) adfi[i]=lockedAdfiVal; adfiGlobalLocked=true; }
+  buildFeeds();calc();
+}
+function setAutoGlobal(f,v){ if(v===2&&adfiGlobalLocked) return; af[f]=v;syncAutoGlobal(f);buildFeeds();calc(); }
+
+// ── Sync auto ──────────────────────────────────────────────
+function syncAutoGlobal(f){
+  const mode=getGlobalMode(); if(mode==='free') return;
+  const aV=adfiGlobalLocked?lockedAdfiVal:adfi[f];
+  if(mode==='days'){
+    const d=lockedDaysVal,g=wout_pf[f]-win_pf[f];
+    if(af[f]===0){ if(fcr[f]>0){wout_pf[f]=+(win_pf[f]+aV*d/fcr[f]).toFixed(1);} setVal('wout-'+f,wout_pf[f]); }
+    else if(af[f]===1){ if(g>0){fcr[f]=+(aV*d/g).toFixed(2);} setVal('fcr-'+f,fcr[f]); }
+    else { if(d>0&&g>0){adfi[f]=+(fcr[f]*g/d).toFixed(2);} setVal('adfi-'+f,adfi[f]); }
+  } else {
+    const g=lockedWoutVal-win_pf[f]; if(g<=0) return;
+    if(af[f]===0){ if(aV>0&&fcr[f]>0){days_pf[f]=Math.round(fcr[f]*g/aV);} setVal('days-'+f,days_pf[f]); }
+    else if(af[f]===1){ if(days_pf[f]>0){fcr[f]=+(aV*days_pf[f]/g).toFixed(2);} setVal('fcr-'+f,fcr[f]); }
+    else { if(days_pf[f]>0){adfi[f]=+(fcr[f]*g/days_pf[f]).toFixed(2);} setVal('adfi-'+f,adfi[f]); }
+  }
+}
+function syncAutoIndiv(f){
+  if(!indivLock[f]||getGlobalMode()!=='free') return;
+  const aV=adfiGlobalLocked?lockedAdfiVal:adfi[f];
+  const v=af_indiv[f];
+  if(indivLock[f]==='days'){
+    const d=days_pf[f],g=wout_pf[f]-win_pf[f];
+    if(v===0){ if(fcr[f]>0){wout_pf[f]=+(win_pf[f]+aV*d/fcr[f]).toFixed(1);} setVal('wout-'+f,wout_pf[f]); }
+    else if(v===1){ if(g>0){fcr[f]=+(aV*d/g).toFixed(2);} setVal('fcr-'+f,fcr[f]); }
+    else { if(d>0&&g>0){adfi[f]=+(fcr[f]*g/d).toFixed(2);} setVal('adfi-'+f,adfi[f]); }
+  } else {
+    const g=wout_pf[f]-win_pf[f]; if(g<=0) return;
+    if(v===0){ if(aV>0&&fcr[f]>0){days_pf[f]=Math.round(fcr[f]*g/aV);} setVal('days-'+f,days_pf[f]); }
+    else if(v===1){ if(days_pf[f]>0){fcr[f]=+(aV*days_pf[f]/g).toFixed(2);} setVal('fcr-'+f,fcr[f]); }
+    else { if(days_pf[f]>0){adfi[f]=+(fcr[f]*g/days_pf[f]).toFixed(2);} setVal('adfi-'+f,adfi[f]); }
+  }
+}
+function syncAutoAdfiIndiv(f){
+  if(!adfiLocked_f[f]||adfiGlobalLocked||getGlobalMode()!=='free'||indivLock[f]) return;
+  const aV=adfi[f],v=af_adfi_f[f],g=wout_pf[f]-win_pf[f];
+  if(v===0){ if(fcr[f]>0&&days_pf[f]>0){wout_pf[f]=+(win_pf[f]+aV*days_pf[f]/fcr[f]).toFixed(1);} setVal('wout-'+f,wout_pf[f]); }
+  else if(v===1){ if(g>0&&days_pf[f]>0){fcr[f]=+(aV*days_pf[f]/g).toFixed(2);} setVal('fcr-'+f,fcr[f]); }
+  else { if(aV>0&&g>0&&fcr[f]>0){days_pf[f]=Math.round(fcr[f]*g/aV);} setVal('days-'+f,days_pf[f]); }
+}
+
+// ── Update UI ──────────────────────────────────────────────
+function updateUIGlobal(f){
+  const mode=getGlobalMode(); if(mode==='free') return;
+  const ids=mode==='days'?['wout','fcr','adfi']:['days','fcr','adfi'];
+  ids.forEach((id,i)=>{
+    const isAuto=(af[f]===i),inp=document.getElementById(id+'-'+f),bdg=document.getElementById('bg-'+id+'-'+f),btn=document.getElementById('lnk-'+id+'-'+f);
+    if(inp){inp.className=isAuto?'auto-inp':'locked-inp';inp.disabled=isAuto;}
+    if(bdg){bdg.className='state-badge '+(isAuto?'auto':'locked');bdg.textContent=isAuto?'↻ 連動':'';}
+    if(btn) btn.className='link-btn'+(isAuto?' active':'');
+  });
+}
+function updateUIIndiv(f){
+  if(!indivLock[f]||getGlobalMode()!=='free') return;
+  const ids=indivLock[f]==='days'?['wout','fcr','adfi']:['days','fcr','adfi'];
+  ids.forEach((id,i)=>{
+    const isAuto=(af_indiv[f]===i),inp=document.getElementById(id+'-'+f),bdg=document.getElementById('bg-'+id+'-'+f),btn=document.getElementById('lnk-'+id+'-'+f);
+    if(inp){inp.className=isAuto?'auto-inp':'locked-inp';inp.disabled=isAuto;}
+    if(bdg){bdg.className='state-badge '+(isAuto?'auto':'locked');bdg.textContent=isAuto?'↻ 連動':'';}
+    if(btn) btn.className='link-btn'+(isAuto?' active':'');
+  });
+}
+function updateUIAdfiIndiv(f){
+  if(!adfiLocked_f[f]||adfiGlobalLocked||getGlobalMode()!=='free'||indivLock[f]) return;
+  const v=af_adfi_f[f];
+  [['wout',0],['fcr',1],['days',2]].forEach(([id,i])=>{
+    const isAuto=(v===i),inp=document.getElementById(id+'-'+f),bdg=document.getElementById('bg-'+id+'-'+f),btn=document.getElementById('lnk-'+id+'-'+f);
+    if(inp){inp.className=isAuto?'auto-inp':'locked-inp';inp.disabled=isAuto;}
+    if(bdg){bdg.className='state-badge '+(isAuto?'auto':'locked');bdg.textContent=isAuto?'↻ 連動':'';}
+    if(btn) btn.className='link-btn'+(isAuto?' active':'');
+  });
+}
+
+// ── Input handlers ─────────────────────────────────────────
+function onWin(f){ win_pf[f]=+document.getElementById('win-'+f).value; recalcFeed(f);calc(); }
+function onAdfi(f){
+  const v=+document.getElementById('adfi-'+f).value;
+  if(adfiGlobalLocked){ lockedAdfiVal=v;for(let i=0;i<feedCount;i++){adfi[i]=v;if(i!==f) setVal('adfi-'+i,v);} }
+  else adfi[f]=v;
+  recalcFeed(f);calc();
+}
+function onFcr(f){ fcr[f]=+document.getElementById('fcr-'+f).value; recalcFeed(f);calc(); }
+function onDays(f){ days_pf[f]=+document.getElementById('days-'+f).value; recalcFeed(f);calc(); }
+function onWoutPF(f){ wout_pf[f]=+document.getElementById('wout-'+f).value; recalcFeed(f);calc(); }
+function onPrice(f){ price[f]=+document.getElementById('price-'+f).value; calc(); }
+function onMkt(f){ mktPrice[f]=+document.getElementById('mkt-'+f).value; calc(); }
+function onPiglet(f){ piglet_pf[f]=+document.getElementById('piglet-'+f).value; calc(); }
+function tgFeed(f,cb){ fen[f]=cb.checked;document.getElementById('fc-'+f).classList.toggle('off',!cb.checked);calc(); }
+function onName(f,el){ fnames[f]=el.value; }
+function onNote(f,el){ notes[f]=el.value; }
+
+function recalcFeed(f){
+  const gm=getGlobalMode();
+  if(gm!=='free'){ syncAutoGlobal(f);updateUIGlobal(f); }
+  else if(indivLock[f]){ syncAutoIndiv(f);updateUIIndiv(f); }
+  else if(adfiLocked_f[f]&&!adfiGlobalLocked&&appMode==='advanced'){ syncAutoAdfiIndiv(f);updateUIAdfiIndiv(f); }
+  else {
+    const g=wout_pf[f]-win_pf[f];
+    if(g>0&&days_pf[f]>0){ fcr[f]=+(adfi[f]*days_pf[f]/g).toFixed(2); setVal('fcr-'+f,fcr[f]); }
+  }
+}
+
+// ── Build feeds UI ─────────────────────────────────────────
+function buildFeeds(){
+  const isAdv=(appMode==='advanced');
+  const feedsEl=document.getElementById('feeds');
+  feedsEl.style.gridTemplateColumns='repeat('+Math.min(feedCount,3)+',1fr)';
+
+  feedsEl.innerHTML=Array.from({length:feedCount},(_,f)=>{
+
+    const fm=getFeedMode(f);
+    const aV=adfiGlobalLocked?lockedAdfiVal:adfi[f];
+    let body='';
+
+    // Top row
+    body+='<div class="field-row">'
+      +'<div class="cf-field"><label>入重 kg</label>'
+      +'<div class="num-wrap"><button class="step-btn" onclick="stepVal(\'win-'+f+'\',-0.5,5,150);onWin('+f+')">&minus;</button><input type="number" id="win-'+f+'" value="'+win_pf[f]+'" step="0.5" min="5" max="150" onchange="onWin('+f+')"><button class="step-btn" onclick="stepVal(\'win-'+f+'\',0.5,5,150);onWin('+f+')">＋</button></div>'
+      +'</div>'
+      +'<div class="cf-field"><label>小豬成本 元/頭</label>'
+      +'<div class="num-wrap"><button class="step-btn" onclick="stepVal(\'piglet-'+f+'\',-50,0,20000);onPiglet('+f+')">&minus;</button><input type="number" id="piglet-'+f+'" value="'+piglet_pf[f]+'" step="50" min="0" max="20000" onchange="onPiglet('+f+')"><button class="step-btn" onclick="stepVal(\'piglet-'+f+'\',50,0,20000);onPiglet('+f+')">＋</button></div>'
+      +'</div>'
+      +'<div class="cf-field"><label>飼料價格 元/kg</label>'
+      +'<div class="num-wrap"><button class="step-btn" onclick="stepVal(\'price-'+f+'\',-0.1,3,50);onPrice('+f+')">&minus;</button><input type="number" id="price-'+f+'" value="'+price[f]+'" step="0.1" min="3" max="50" onchange="onPrice('+f+')"><button class="step-btn" onclick="stepVal(\'price-'+f+'\',0.1,3,50);onPrice('+f+')">＋</button></div>'
+      +'</div>'
+      +'</div>';
+
+    // Label builder for trio fields
+    function lbl(text,lockType,glockOnclick,glockActive){
+      let s=text;
+      if(isAdv){
+        const isIL=(indivLock[f]===lockType);
+        if(lockType) s+=' <button class="lock-btn'+(isIL?' locked':'')+'" onclick="toggle'+
+          (lockType==='days'?'IndivDays':'IndivWout')+'('+f+')" title="個別鎖定">'+(isIL?'🔒':'🔓')+'</button>';
+        if(glockOnclick) s+=' <button class="glock-btn'+(glockActive?' glocked':'')+'" onclick="'+glockOnclick+'" title="同步全部飼料">全</button>';
+      }
+      return s;
+    }
+    function adfiLbl(){
+      if(!isAdv) return '採食量 kg/天';
+      const isIA=adfiLocked_f[f]&&!adfiGlobalLocked;
+      return '採食量 kg/天 <button class="lock-btn'+(isIA?' locked':'')+'" onclick="toggleIndivAdfi('+f+')" title="個別鎖定">'+(isIA?'🔒':'🔓')+'</button>'
+        +' <button class="glock-btn'+(adfiGlobalLocked?' glocked':'')+'" onclick="toggleAdfiGlobalLock('+f+')" title="同步全部飼料">全</button>';
+    }
+    function linkRow(pairs){
+      return '<div class="link-row"><span class="link-lbl">連動</span><div class="link-btns">'
+        +pairs.map(p=>'<button class="link-btn'+(p.active?' active':'')+'" id="lnk-'+p.id+'-'+f+'" onclick="'+p.fn+'"'+(p.dis?' disabled style="opacity:0.4"':'')+'>'+p.label+'</button>').join('')
+        +'</div></div>';
+    }
+    function inp(id,cls,val,dis,onch,st,mn,mx){
+      st=st||0.1; mn=mn!=null?mn:0; mx=mx||9999;
+      if(dis) return '<input type="number" id="'+id+'" class="'+cls+'" value="'+val+'" step="'+st+'" min="'+mn+'" disabled>';
+      return '<div class="num-wrap">'
+        +'<button class="step-btn" onclick="stepVal(\''+id+'\','+(-st)+','+mn+','+mx+');'+onch+'">&minus;</button>'
+        +'<input type="number" id="'+id+'" class="'+cls+'" value="'+val+'" step="'+st+'" min="'+mn+'" max="'+mx+'" onchange="'+onch+'">'
+        +'<button class="step-btn" onclick="stepVal(\''+id+'\','+st+','+mn+','+mx+');'+onch+'">＋</button>'
+        +'</div>';
+    }
+    function badge(id,cls,txt){ return '<span class="state-badge '+(cls||'')+'" id="'+(id||'')+'">'+(txt||'')+'</span>'; }
+
+    body+='<div class="trio-box">';
+
+    // ── GLOBAL DAYS ────────────────────────────────────────
+    if(fm==='days'){
+      const iWA=(af[f]===0),iFA=(af[f]===1),iAA=(af[f]===2);
+      const adfiIL=adfiLocked_f[f]&&!adfiGlobalLocked&&!iAA;
+      body+='<div class="trio-row">'
+        +'<div class="trio-item"><label>'+lbl('出重 kg','wout','toggleWoutLock('+f+')',woutLocked)+'</label>'
+        +inp('wout-'+f,iWA?'auto-inp':'locked-inp',wout_pf[f],iWA,'onWoutPF('+f+')',0.5,30,300)
+        +badge('bg-wout-'+f,iWA?'auto':'locked',iWA?'↻ 連動':'')+'</div>'
+
+        +'<div class="trio-item'+(adfiGlobalLocked?' field-locked':'')+'"><label>'+adfiLbl()+'</label>'
+        +inp('adfi-'+f,adfiGlobalLocked?'auto-inp':(iAA?'auto-inp':(adfiIL?'auto-inp':'locked-inp')),aV,adfiGlobalLocked||iAA||adfiIL,'onAdfi('+f+')',0.1,0.5,8)
+        +badge('bg-adfi-'+f,iAA?'auto':'locked',iAA?'↻ 連動':'')+'</div>'
+        +'</div>'
+
+        +'<div class="trio-row">'
+        +'<div class="trio-item field-locked"><label>飼養天數 天 '+(isAdv?'<button class="lock-btn locked" onclick="toggleDaysLock('+f+')" title="解除全部同步">🔒</button>':'')+'</label>'
+        +inp('days-'+f,'auto-inp',lockedDaysVal,true,'')
+        +badge()+'</div>'
+
+        +'<div class="trio-item"><label>FCR</label>'
+        +inp('fcr-'+f,iFA?'auto-inp':'locked-inp',fcr[f],iFA,'onFcr('+f+')',0.05,1,8)
+        +badge('bg-fcr-'+f,iFA?'auto':'locked',iFA?'↻ 連動':'')+'</div>'
+        +'</div>'
+
+        +linkRow([
+          {id:'wout',label:'出重',active:iWA,fn:'setAutoGlobal('+f+',0)'},
+          {id:'fcr',label:'FCR',active:iFA,fn:'setAutoGlobal('+f+',1)'},
+          {id:'adfi',label:'採食量',active:iAA&&!adfiGlobalLocked,fn:'setAutoGlobal('+f+',2)',dis:adfiGlobalLocked}
+        ]);
+
+    // ── GLOBAL WOUT ────────────────────────────────────────
+    } else if(fm==='wout'){
+      const iDA=(af[f]===0),iFA=(af[f]===1),iAA=(af[f]===2);
+      const adfiIL=adfiLocked_f[f]&&!adfiGlobalLocked&&!iAA;
+      body+='<div class="trio-row">'
+        +'<div class="trio-item field-locked"><label>出重 kg '+(isAdv?'<button class="lock-btn locked" onclick="toggleWoutLock('+f+')" title="解除全部同步">🔒</button>':'')+'</label>'
+        +inp('wout-'+f,'auto-inp',lockedWoutVal,true,'')
+        +badge()+'</div>'
+
+        +'<div class="trio-item'+(adfiGlobalLocked?' field-locked':'')+'"><label>'+adfiLbl()+'</label>'
+        +inp('adfi-'+f,adfiGlobalLocked?'auto-inp':(iAA?'auto-inp':(adfiIL?'auto-inp':'locked-inp')),aV,adfiGlobalLocked||iAA||adfiIL,'onAdfi('+f+')',0.1,0.5,8)
+        +badge('bg-adfi-'+f,iAA?'auto':'locked',iAA?'↻ 連動':'')+'</div>'
+        +'</div>'
+
+        +'<div class="trio-row">'
+        +'<div class="trio-item"><label>'+lbl('飼養天數 天','days','toggleDaysLock('+f+')',daysLocked)+'</label>'
+        +inp('days-'+f,iDA?'auto-inp':'locked-inp',days_pf[f],iDA,'onDays('+f+')',1,30,300)
+        +badge('bg-days-'+f,iDA?'auto':'locked',iDA?'↻ 連動':'')+'</div>'
+
+        +'<div class="trio-item"><label>FCR</label>'
+        +inp('fcr-'+f,iFA?'auto-inp':'locked-inp',fcr[f],iFA,'onFcr('+f+')',0.05,1,8)
+        +badge('bg-fcr-'+f,iFA?'auto':'locked',iFA?'↻ 連動':'')+'</div>'
+        +'</div>'
+
+        +linkRow([
+          {id:'days',label:'天數',active:iDA,fn:'setAutoGlobal('+f+',0)'},
+          {id:'fcr',label:'FCR',active:iFA,fn:'setAutoGlobal('+f+',1)'},
+          {id:'adfi',label:'採食量',active:iAA&&!adfiGlobalLocked,fn:'setAutoGlobal('+f+',2)',dis:adfiGlobalLocked}
+        ]);
+
+    // ── INDIVIDUAL DAYS ────────────────────────────────────
+    } else if(fm==='indiv_days'){
+      const v=af_indiv[f],iWA=(v===0),iFA=(v===1),iAA=(v===2);
+      const adfiIL=adfiLocked_f[f]&&!adfiGlobalLocked&&!iAA;
+      body+='<div class="trio-row">'
+        +'<div class="trio-item"><label>'+lbl('出重 kg','wout','toggleWoutLock('+f+')',woutLocked)+'</label>'
+        +inp('wout-'+f,iWA?'auto-inp':'locked-inp',wout_pf[f],iWA,'onWoutPF('+f+')',0.5,30,300)
+        +badge('bg-wout-'+f,iWA?'auto':'locked',iWA?'↻ 連動':'')+'</div>'
+
+        +'<div class="trio-item'+(adfiGlobalLocked?' field-locked':'')+'"><label>'+adfiLbl()+'</label>'
+        +inp('adfi-'+f,adfiGlobalLocked?'auto-inp':(iAA?'auto-inp':(adfiIL?'auto-inp':'locked-inp')),aV,adfiGlobalLocked||iAA||adfiIL,'onAdfi('+f+')',0.1,0.5,8)
+        +badge('bg-adfi-'+f,iAA?'auto':'locked',iAA?'↻ 連動':'')+'</div>'
+        +'</div>'
+
+        +'<div class="trio-row">'
+        +'<div class="trio-item field-indiv"><label>飼養天數 天 <button class="lock-btn locked" onclick="toggleIndivDays('+f+')" title="解除個別鎖定">🔒</button>'
+        +' <button class="glock-btn'+(daysLocked?' glocked':'')+'" onclick="toggleDaysLock('+f+')" title="同步全部飼料">全</button></label>'
+        +inp('days-'+f,'auto-inp',days_pf[f],true,'')
+        +badge()+'</div>'
+
+        +'<div class="trio-item"><label>FCR</label>'
+        +inp('fcr-'+f,iFA?'auto-inp':'locked-inp',fcr[f],iFA,'onFcr('+f+')',0.05,1,8)
+        +badge('bg-fcr-'+f,iFA?'auto':'locked',iFA?'↻ 連動':'')+'</div>'
+        +'</div>'
+
+        +linkRow([
+          {id:'wout',label:'出重',active:iWA,fn:'setAutoIndiv('+f+',0)'},
+          {id:'fcr',label:'FCR',active:iFA,fn:'setAutoIndiv('+f+',1)'},
+          {id:'adfi',label:'採食量',active:iAA&&!adfiGlobalLocked,fn:'setAutoIndiv('+f+',2)',dis:adfiGlobalLocked}
+        ]);
+
+    // ── INDIVIDUAL WOUT ────────────────────────────────────
+    } else if(fm==='indiv_wout'){
+      const v=af_indiv[f],iDA=(v===0),iFA=(v===1),iAA=(v===2);
+      const adfiIL=adfiLocked_f[f]&&!adfiGlobalLocked&&!iAA;
+      body+='<div class="trio-row">'
+        +'<div class="trio-item field-indiv"><label>出重 kg <button class="lock-btn locked" onclick="toggleIndivWout('+f+')" title="解除個別鎖定">🔒</button>'
+        +' <button class="glock-btn'+(woutLocked?' glocked':'')+'" onclick="toggleWoutLock('+f+')" title="同步全部飼料">全</button></label>'
+        +inp('wout-'+f,'auto-inp',wout_pf[f],true,'')
+        +badge()+'</div>'
+
+        +'<div class="trio-item'+(adfiGlobalLocked?' field-locked':'')+'"><label>'+adfiLbl()+'</label>'
+        +inp('adfi-'+f,adfiGlobalLocked?'auto-inp':(iAA?'auto-inp':(adfiIL?'auto-inp':'locked-inp')),aV,adfiGlobalLocked||iAA||adfiIL,'onAdfi('+f+')',0.1,0.5,8)
+        +badge('bg-adfi-'+f,iAA?'auto':'locked',iAA?'↻ 連動':'')+'</div>'
+        +'</div>'
+
+        +'<div class="trio-row">'
+        +'<div class="trio-item"><label>'+lbl('飼養天數 天','days','toggleDaysLock('+f+')',daysLocked)+'</label>'
+        +inp('days-'+f,iDA?'auto-inp':'locked-inp',days_pf[f],iDA,'onDays('+f+')',1,30,300)
+        +badge('bg-days-'+f,iDA?'auto':'locked',iDA?'↻ 連動':'')+'</div>'
+
+        +'<div class="trio-item"><label>FCR</label>'
+        +inp('fcr-'+f,iFA?'auto-inp':'locked-inp',fcr[f],iFA,'onFcr('+f+')',0.05,1,8)
+        +badge('bg-fcr-'+f,iFA?'auto':'locked',iFA?'↻ 連動':'')+'</div>'
+        +'</div>'
+
+        +linkRow([
+          {id:'days',label:'天數',active:iDA,fn:'setAutoIndiv('+f+',0)'},
+          {id:'fcr',label:'FCR',active:iFA,fn:'setAutoIndiv('+f+',1)'},
+          {id:'adfi',label:'採食量',active:iAA&&!adfiGlobalLocked,fn:'setAutoIndiv('+f+',2)',dis:adfiGlobalLocked}
+        ]);
+
+    // ── FREE ───────────────────────────────────────────────
+    } else {
+      const aIA=adfiLocked_f[f]&&!adfiGlobalLocked;
+      if(isAdv&&aIA){
+        // adfi locked: linkage 出重/FCR/天數
+        const v=af_adfi_f[f],iWA=(v===0),iFA=(v===1),iDA=(v===2);
+        body+='<div class="trio-row">'
+          +'<div class="trio-item"><label>'+lbl('出重 kg','wout','toggleWoutLock('+f+')',woutLocked)+'</label>'
+          +inp('wout-'+f,iWA?'auto-inp':'locked-inp',wout_pf[f],iWA,'onWoutPF('+f+')',0.5,30,300)
+          +badge('bg-wout-'+f,iWA?'auto':'locked',iWA?'↻ 連動':'')+'</div>'
+
+          +'<div class="trio-item field-indiv"><label>採食量 kg/天 <button class="lock-btn locked" onclick="toggleIndivAdfi('+f+')" title="解除個別鎖定">🔒</button>'
+          +' <button class="glock-btn'+(adfiGlobalLocked?' glocked':'')+'" onclick="toggleAdfiGlobalLock('+f+')" title="同步全部飼料">全</button></label>'
+          +inp('adfi-'+f,'auto-inp',aV,true,'')
+          +badge('bg-adfi-'+f)+'</div>'
+          +'</div>'
+
+          +'<div class="trio-row">'
+          +'<div class="trio-item"><label>'+lbl('飼養天數 天','days','toggleDaysLock('+f+')',daysLocked)+'</label>'
+          +inp('days-'+f,iDA?'auto-inp':'locked-inp',days_pf[f],iDA,'onDays('+f+')',1,30,300)
+          +badge('bg-days-'+f,iDA?'auto':'locked',iDA?'↻ 連動':'')+'</div>'
+
+          +'<div class="trio-item"><label>FCR</label>'
+          +inp('fcr-'+f,iFA?'auto-inp':'locked-inp',fcr[f],iFA,'onFcr('+f+')',0.05,1,8)
+          +badge('bg-fcr-'+f,iFA?'auto':'locked',iFA?'↻ 連動':'')+'</div>'
+          +'</div>'
+
+          +linkRow([
+            {id:'wout',label:'出重',active:iWA,fn:'setAutoAdfiIndiv('+f+',0)'},
+            {id:'fcr',label:'FCR',active:iFA,fn:'setAutoAdfiIndiv('+f+',1)'},
+            {id:'days',label:'天數',active:iDA,fn:'setAutoAdfiIndiv('+f+',2)'}
+          ]);
+      } else {
+        // Pure free
+        const g=wout_pf[f]-win_pf[f];
+        const fcrA=(g>0&&days_pf[f]>0)?+(adfi[f]*days_pf[f]/g).toFixed(2):fcr[f];
+        body+='<div class="trio-row">'
+          +'<div class="trio-item"><label>'+lbl('出重 kg','wout','toggleWoutLock('+f+')',woutLocked)+'</label>'
+          +inp('wout-'+f,'locked-inp',wout_pf[f],false,'onWoutPF('+f+')',0.5,30,300)+'</div>'
+
+          +'<div class="trio-item'+(adfiGlobalLocked?' field-locked':'')+'"><label>'+adfiLbl()+'</label>'
+          +inp('adfi-'+f,adfiGlobalLocked?'auto-inp':'locked-inp',aV,adfiGlobalLocked,'onAdfi('+f+')',0.1,0.5,8)+'</div>'
+          +'</div>'
+
+          +'<div class="trio-row">'
+          +'<div class="trio-item"><label>'+lbl('飼養天數 天','days','toggleDaysLock('+f+')',daysLocked)+'</label>'
+          +inp('days-'+f,'locked-inp',days_pf[f],false,'onDays('+f+')',1,30,300)+'</div>'
+
+          +'<div class="trio-item"><label>FCR <span class="fcr-auto-tag">↻ 連動</span></label>'
+          +'<input type="number" id="fcr-'+f+'" class="auto-inp" value="'+fcrA+'" disabled></div>'
+          +'</div>';
+      }
+    }
+
+    body+='</div>'; // trio-box
+
+    // Bottom row
+    body+='<div class="field-row-bot">'
+      +'<div class="cf-field mkt-field"><label>出豬牌價 元/kg</label>'
+      +'<div class="num-wrap"><button class="step-btn" onclick="stepVal(\'mkt-'+f+'\',-1,20,200);onMkt('+f+')">&minus;</button><input type="number" id="mkt-'+f+'" value="'+mktPrice[f]+'" step="1" min="20" max="200" onchange="onMkt('+f+')"><button class="step-btn" onclick="stepVal(\'mkt-'+f+'\',1,20,200);onMkt('+f+')">＋</button></div>'
+      +'</div>'
+      +'</div>';
+    body+='<div style="margin-top:8px"><label style="font-size:11px;color:#777">備註</label>'
+      +'<textarea id="note-'+f+'" rows="2" oninput="onNote('+f+',this)" style="width:100%;margin-top:3px;font-size:12px;padding:6px 8px;border-radius:8px;border:0.5px solid rgba(0,0,0,0.15);background:#fff;color:#1a1a1a;resize:none;font-family:inherit;line-height:1.5">'+notes[f]+'</textarea>'
+      +'</div>';
+
+    const rmBtn=f>0?'<button class="rm-btn" onclick="removeFeed('+f+')" title="移除此飼料">✕</button>':'';
+    return '<div class="fcard'+(fen[f]?'':' off')+'" id="fc-'+f+'" style="border-top:3px solid '+ACC[f]+'">'
+      +'<div class="fhdr"><input type="checkbox" '+(fen[f]?'checked':'')+' onchange="tgFeed('+f+',this)">'
+      +'<div class="fname-wrap"><span class="fname-icon">✏️</span><input class="fname" type="text" value="'+fnames[f]+'" oninput="onName('+f+',this)"></div>'
+      +'<span id="best-badge-'+f+'"></span>'
+      +rmBtn+'</div>'
+      +'<div class="fbody">'+body+'</div></div>';
+  }).join('');
+  setupScrub();
+}
+
+// ── calcFeed ───────────────────────────────────────────────
+function calcFeed(f){
+  const fm=getFeedMode(f);
+  const aV=adfiGlobalLocked?lockedAdfiVal:adfi[f];
+  let woutF,daysF,g;
+
+  if(fm==='days'){
+    daysF=lockedDaysVal;
+    if(af[f]===0){ if(fcr[f]<=0) return null; woutF=+(win_pf[f]+aV*daysF/fcr[f]).toFixed(1); }
+    else woutF=wout_pf[f];
+    g=woutF-win_pf[f]; if(g<=0) return null;
+    if(af[f]===1) fcr[f]=+(aV*daysF/g).toFixed(2);
+    else if(af[f]===2&&!adfiGlobalLocked) adfi[f]=+(fcr[f]*g/daysF).toFixed(2);
+  } else if(fm==='wout'){
+    woutF=lockedWoutVal; g=woutF-win_pf[f]; if(g<=0) return null;
+    if(af[f]===0){ if(aV<=0||fcr[f]<=0) return null; daysF=+(fcr[f]*g/aV).toFixed(1); }
+    else daysF=days_pf[f];
+    if(af[f]===1) fcr[f]=+(aV*daysF/g).toFixed(2);
+    else if(af[f]===2&&!adfiGlobalLocked) adfi[f]=+(fcr[f]*g/daysF).toFixed(2);
+  } else if(fm==='indiv_days'){
+    const v=af_indiv[f]; daysF=days_pf[f];
+    if(v===0){ if(fcr[f]<=0) return null; woutF=+(win_pf[f]+aV*daysF/fcr[f]).toFixed(1);wout_pf[f]=woutF; }
+    else woutF=wout_pf[f];
+    g=woutF-win_pf[f]; if(g<=0) return null;
+    if(v===1) fcr[f]=+(aV*daysF/g).toFixed(2);
+    else if(v===2&&!adfiGlobalLocked) adfi[f]=+(fcr[f]*g/daysF).toFixed(2);
+  } else if(fm==='indiv_wout'){
+    const v=af_indiv[f]; woutF=wout_pf[f]; g=woutF-win_pf[f]; if(g<=0) return null;
+    if(v===0){ if(aV<=0||fcr[f]<=0) return null; daysF=+(fcr[f]*g/aV).toFixed(1);days_pf[f]=+daysF; }
+    else daysF=days_pf[f];
+    if(v===1) fcr[f]=+(aV*daysF/g).toFixed(2);
+    else if(v===2&&!adfiGlobalLocked) adfi[f]=+(fcr[f]*g/daysF).toFixed(2);
+  } else {
+    const aIA=adfiLocked_f[f]&&!adfiGlobalLocked&&appMode==='advanced';
+    if(aIA){
+      const v=af_adfi_f[f]; woutF=wout_pf[f]; daysF=days_pf[f];
+      if(v===0){ if(fcr[f]<=0||daysF<=0) return null; woutF=+(win_pf[f]+aV*daysF/fcr[f]).toFixed(1);wout_pf[f]=woutF; }
+      g=woutF-win_pf[f]; if(g<=0) return null;
+      if(v===2){ if(aV<=0||fcr[f]<=0) return null; daysF=Math.round(fcr[f]*g/aV);days_pf[f]=daysF; }
+      if(v===1) fcr[f]=+(aV*daysF/g).toFixed(2);
+    } else {
+      woutF=wout_pf[f]; daysF=days_pf[f];
+      g=woutF-win_pf[f]; if(g<=0) return null;
+      fcr[f]=+(aV*daysF/g).toFixed(2);
+    }
+  }
+
+  if(!daysF||daysF<=0||!g||g<=0||fcr[f]<=0) return null;
+  const feedCost=price[f]*fcr[f]*g;
+  const pigletCost=piglet_pf[f];
+  const sale=mktPrice[f]*woutF;
+  const profit=sale-feedCost-pigletCost;
+  const bep=(feedCost+pigletCost)/woutF;
+  const cpk=feedCost/g;
+  return{feedCost,pigletCost,sale,profit,bep,cpk,g,daysF,woutF};
+}
+
+// ── calc & results ─────────────────────────────────────────
+function calc(){
+  const res=[];
+  for(let f=0;f<feedCount;f++){ if(fen[f]){ const r=calcFeed(f); if(r) res.push({f,name:fnames[f],...r}); } }
+  for(let f=0;f<feedCount;f++){ const bb=document.getElementById('best-badge-'+f); if(bb) bb.innerHTML=''; }
+  const el=document.getElementById('results');
+  if(!res.length){ el.innerHTML='<p style="font-size:12px;color:#888">請啟用至少一個飼料</p>'; return; }
+  const badgeMap={};
+  if(res.length>1){
+    const maxP=Math.max(...res.map(r=>Math.round(r.profit)));
+    const top=res.filter(r=>Math.round(r.profit)===maxP);
+    if(top.length<res.length){
+      const txt=top.length>1?'最高毛利(平分)':'最高毛利';
+      top.forEach(r=>{ badgeMap[r.f]=txt; });
+    }
+  }
+  el.style.gridTemplateColumns='repeat('+Math.min(res.length,3)+',1fr)';
+  el.innerHTML=res.map(r=>{
+    const badge=badgeMap[r.f]||'',isBest=!!badge;
+    const profPos=r.profit>=0,gap=mktPrice[r.f]-r.bep;
+    const bb=document.getElementById('best-badge-'+r.f);
+    if(bb) bb.innerHTML=badge?'<span class="badge hdr-badge">'+badge+'</span>':'';
+    return '<div class="rcard'+(isBest?' best':'')+'">'
+      +'<div class="rcard-name">'+r.name+(badge?'<span class="badge">'+badge+'</span>':'')+'</div>'
+      +'<div class="calc-box">'
+      +'<div class="cline"><span class="lbl">毛豬售價</span><span class="val">'+r.sale.toFixed(0)+' 元/頭</span></div>'
+      +'<div class="cline"><span class="lbl">飼料費</span><span class="val neg">− '+r.feedCost.toFixed(0)+' 元</span></div>'
+      +'<div class="cline"><span class="lbl">小豬成本</span><span class="val neg">− '+r.pigletCost.toFixed(0)+' 元</span></div>'
+      +'<hr class="divider">'
+      +'<div class="profit-row"><span class="profit-lbl">毛利/頭</span><span class="profit-val '+(profPos?'pos':'neg')+'">'+(profPos?'+':'')+r.profit.toFixed(0)+' 元</span></div>'
+      +'</div>'
+      +'<div class="bep-box"><div><div class="bep-lbl">損益點牌價</div><span class="bep-val">'+r.bep.toFixed(1)+' 元/kg</span><span class="bep-gap '+(gap>=0?'pos':'neg')+'">'+(gap>=0?'▲':'▼')+Math.abs(gap).toFixed(1)+' 元</span></div>'
+      +'<div style="text-align:right"><div class="bep-lbl">造肉成本</div><span class="bep-val">'+r.cpk.toFixed(2)+' 元/kg</span></div></div>'
+      +'</div>';
+  }).join('');
+}
+
+// ── localStorage ───────────────────────────────────────────
+function getTimestamp(){
+  const d=new Date();
+  return d.getFullYear()+'/'
+    +('0'+(d.getMonth()+1)).slice(-2)+'/'
+    +('0'+d.getDate()).slice(-2)+' '
+    +('0'+d.getHours()).slice(-2)+':'
+    +('0'+d.getMinutes()).slice(-2);
+}
+function updateRecCount(){
+  const records=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  const el=document.getElementById('rec-count');
+  if(el) el.textContent=records.length?'已儲存 '+records.length+' 筆':'';
+}
+function saveRecord(){
+  const records=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  const ts=getTimestamp(); let saved=0;
+  for(let f=0;f<feedCount;f++){
+    if(!fen[f]) continue; const r=calcFeed(f); if(!r) continue;
+    records.push({時間:ts,飼料名稱:fnames[f],入重:win_pf[f],小豬成本:piglet_pf[f],飼料價格:price[f],
+      出重:+r.woutF.toFixed(1),採食量:+adfi[f].toFixed(2),飼養天數:+r.daysF.toFixed(0),FCR:+fcr[f].toFixed(2),
+      出豬牌價:mktPrice[f],毛豬售價:+r.sale.toFixed(0),飼料費:+r.feedCost.toFixed(0),毛利:+r.profit.toFixed(0),
+      損益點牌價:+r.bep.toFixed(1),造肉成本:+r.cpk.toFixed(2),備註:notes[f]}); saved++;
+  }
+  if(!saved){ alert('無可儲存的有效試算結果'); return; }
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(records)); updateRecCount();
+  alert('✅ 已儲存 '+saved+' 筆記錄（'+ts+'）\n累計共 '+records.length+' 筆');
+}
+function exportAllRecords(){
+  const records=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  if(!records.length){ alert('尚無儲存記錄，請先按「儲存此次記錄」'); return; }
+  const headers=['時間','飼料名稱','入重(kg)','小豬成本(元)','飼料價格(元/kg)','出重(kg)','採食量(kg/天)','飼養天數(天)','FCR','出豬牌價(元/kg)','毛豬售價(元)','飼料費(元)','毛利(元)','損益點牌價(元/kg)','造肉成本(元/kg)','備註'];
+  const rows=[headers];
+  records.forEach(r=>rows.push([r.時間,r.飼料名稱,r.入重,r.小豬成本,r.飼料價格,r.出重,r.採食量,r.飼養天數,r.FCR,r.出豬牌價,r.毛豬售價,r.飼料費,r.毛利,r.損益點牌價,r.造肉成本,r.備註]));
+  const ws=XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols']=[{wch:16},{wch:12},{wch:9},{wch:13},{wch:15},{wch:9},{wch:14},{wch:13},{wch:7},{wch:15},{wch:12},{wch:10},{wch:10},{wch:16},{wch:14},{wch:24}];
+  const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'造肉成本記錄');
+  const d=new Date();const ds=d.getFullYear()+('0'+(d.getMonth()+1)).slice(-2)+('0'+d.getDate()).slice(-2);
+  XLSX.writeFile(wb,'造肉成本記錄_'+ds+'.xlsx');
+}
+function exportExcel(){
+  const rows=[['飼料名稱','入重(kg)','小豬成本(元)','飼料價格(元/kg)','出重(kg)','採食量(kg/天)','飼養天數(天)','FCR','出豬牌價(元/kg)','毛豬售價(元)','飼料費(元)','小豬成本(元)','毛利(元)','損益點牌價(元/kg)','造肉成本(元/kg)','備註']];
+  for(let f=0;f<feedCount;f++){
+    if(!fen[f]) continue; const r=calcFeed(f); if(!r) continue;
+    rows.push([fnames[f],win_pf[f],piglet_pf[f],price[f],+r.woutF.toFixed(1),+adfi[f].toFixed(2),+r.daysF.toFixed(0),+fcr[f].toFixed(2),mktPrice[f],+r.sale.toFixed(0),+r.feedCost.toFixed(0),+r.pigletCost.toFixed(0),+r.profit.toFixed(0),+r.bep.toFixed(1),+r.cpk.toFixed(2),notes[f]]);
+  }
+  const ws=XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols']=[{wch:12},{wch:9},{wch:13},{wch:15},{wch:9},{wch:14},{wch:13},{wch:7},{wch:15},{wch:12},{wch:10},{wch:12},{wch:10},{wch:16},{wch:14},{wch:24}];
+  const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'造肉成本試算');
+  const d=new Date();const ds=d.getFullYear()+('0'+(d.getMonth()+1)).slice(-2)+('0'+d.getDate()).slice(-2);
+  XLSX.writeFile(wb,'造肉成本試算_'+ds+'.xlsx');
+}
+function clearRecords(){
+  const records=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+  if(!records.length){ alert('目前沒有儲存的記錄'); return; }
+  if(!confirm('確定清除全部 '+records.length+' 筆儲存記錄？此動作無法復原。')) return;
+  localStorage.removeItem(STORAGE_KEY); updateRecCount(); alert('記錄已清除');
+}
+
+buildFeeds(); calc(); updateRecCount();
+</script>
+</body>
+</html>
